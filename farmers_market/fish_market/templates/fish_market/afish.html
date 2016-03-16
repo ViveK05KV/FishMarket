@@ -1,0 +1,165 @@
+{% load static from staticfiles %}
+<html>
+<head>
+  <title>Fish</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'  %}">
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
+  <script src="{% static 'js/jquery-1.12.0.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.css' %}">
+  <script src="{% static 'dist/semantic.js' %}"></script>
+  <script src="{% static 'js/dropdown.js' %}"> </script>
+  <script src="{% static 'js/counter.js' %}"></script>
+</head>
+<body>
+
+  <div id="header">
+    <div class="ui inverted segment" id="menu">
+      <div class="ui inverted secondary  menu">
+        <a class="item" style="font-size:20px;margin-left:50px;" href="index.html">Logo</a>
+        <a class="item" style="margin-right:40px;margin-left:70px;" href="index.html">
+          <i class="big home icon"></i>
+          Home
+        </a>
+        <div class="ui pointing dropdown link item">
+          <i class="big help icon"></i>
+          <span class="text">Help</span>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item">Follow</div>
+            <div class="item">About Us</div>
+            <div class="item">FAQ's</div>
+            <div class="item">Contact Us</div>
+          </div>
+        </div>
+        <a class="item" style="margin-left:30px;">
+          <i class="big idea icon"></i>
+          How is it work
+        </a>
+        <div class="right menu">
+          <div class="item">
+            <div class="ui icon input">
+              <input type="text" placeholder="Search...">
+              <i class="search link icon"></i>
+            </div>
+          </div>
+          <button class="ui inverted button">
+            <i class="Add to cart icon"></i>
+            Cart
+          </button>
+          <a class="ui item">
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="fish_container">
+    <div id="fish_details">
+      <div id="img_holder">
+        <img class="ui large rounded image" src="{{ fish_market.picURL }}">
+
+      </div>
+      <div id="desc_holder">
+        Fish name<br>
+        Rate/kg
+        <p>Fish details</p>
+      </div>
+    </div>
+    <div id="fish_cut" align="center">
+      <div class="ui three column grid">
+        <div class="column">
+          <div class="ui segment">
+            <div class="type">
+              <img class="type_img" src="img/img1.jpg"/>
+              <div class="ui black pointing label">
+                Whole
+              </div><br>
+              <p class="fish_rate">
+                Rate/Kg
+              </p>
+              <div class="ui icon buttons">
+                <button class="ui button" id="whole_subtract">
+                  <i class="minus icon"></i>
+                </button>
+                <button class="ui button" id="whole_counter">
+                </button>
+                <button class="ui button" id="whole_add">
+                  <i class="plus icon"></i>
+                </button>
+              </div>
+              <p class="fish_rate">
+                Total : 000
+              </p>
+              <button class="ui black button">Add to cart
+                <i class="add to cart icon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <div class="type">
+              <img class="type_img" src="img/img1.jpg"/>
+              <div class="ui black pointing label">
+                Whole Clean
+              </div><br>
+              <p class="fish_rate">
+                Rate/Kg
+              </p>
+              <div class="ui icon buttons">
+                <button class="ui button" id="clean_subtract">
+                  <i class="minus icon"></i>
+                </button>
+                <button class="ui button" id="clean_counter">
+                </button>
+                <button class="ui button" id="clean_add">
+                  <i class="plus icon"></i>
+                </button>
+              </div>
+              <p class="fish_rate">
+                Total : 000
+              </p>
+              <button class="ui black button">Add to cart
+                <i class="add to cart icon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="ui segment">
+            <div class="type">
+              <img class="type_img" src=""/>
+              <div class="ui black pointing label">
+                Curry Cut
+              </div><br>
+              <p class="fish_rate">
+                Rate/Kg
+              </p>
+              <div class="ui icon buttons">
+                <button class="ui button" id="cut_subtract">
+                  <i class="minus icon"></i>
+                </button>
+                <button class="ui button" id="cut_counter">
+                </button>
+                <button class="ui button" id="cut_add">
+                  <i class="plus icon"></i>
+                </button>
+              </div>
+              <p class="fish_rate">
+                Total : 000
+              </p>
+              <button class="ui black button">Add to cart
+                <i class="add to cart icon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+
+  </div>
+</body>
+</html>

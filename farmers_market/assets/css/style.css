@@ -1,0 +1,47 @@
+#header{
+
+}
+#menu{
+
+}
+#main_img{
+  margin-top: 30px;
+  width: 1024px;
+}
+
+#slider{
+  margin-left: 12%;
+}
+
+/*---------------IMAGE START---------------------------*/
+.img_wrap{
+  position: relative;
+  height: 325px;
+  width: 480px;
+}
+
+.img_desc {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(204, 204, 204, 0.72);
+  color: #7c7c7c;
+  visibility: hidden;
+  opacity: 0;
+
+  /*remove comment if you want a gradual transition between states
+  -webkit-transition: visibility opacity 0.2s;
+  */
+}
+.img_wrap:hover .img_desc {
+  visibility: visible;
+  opacity: 1;
+}
+/*------------------------IMAGE END---------------------------------------------------*/
+
+#container{
+  margin-left: 150px;
+  margin-right: 150px;
+}
