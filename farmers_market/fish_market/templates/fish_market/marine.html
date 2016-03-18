@@ -45,13 +45,13 @@
     <a class="ui black tag label" style="font-size:20px;margin-bottom:20px;margin-top:20px">Marine Fish</a>
     <div id="marine_fish">
       <div class="ui two column grid">
-        {% for fish in marine_fish %}
+        {% for fish in all_fish %}
         <div class="column">
           <div class="ui segment">
             <div class="img_wrap">
-              <img src="{{ fish.picURL}}" style="width:480px;height:325px"/>
-              <p class="img_desc">{{ fish.description }}
-                <button class="ui black button">See</button>
+              <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
+              <p class="img_desc">{{ fish.fishdesc }}
+                <button class="ui black button">cost of fish to be implemented here</button>
               </p>
             </div>
           </div>
