@@ -1,24 +1,37 @@
 {% load static from staticfiles %}
+
 <html>
 <head>
-  <title>Test</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.css' %}">
+  <title>Main</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <script src="{% static 'dist/semantic.js' %}"></script>
-  <script src="{% static 'js/jquery-1.12.0.js' %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.min.css' %}">
+  <script src="{% static 'dist/semantic.min.js' %}"></script>
+  <script src="{% static 'js/dropdown.js' %}"></script>
 </head>
 <body>
   <div id="header">
     <div class="ui inverted segment" id="menu">
       <div class="ui inverted secondary  menu">
-        <a class="item" style="font-size:20px;margin-left:50px;">Logo</a>
-        <a class="item" style="margin-right:100px;margin-left:70px;">
+        <a class="item" style="font-size:20px;margin-left:50px;" href="index.html">Logo</a>
+        <a class="item" style="margin-right:40px;margin-left:70px;" href="index.html">
           <i class="big home icon"></i>
           Home
         </a>
-        <a class="item">
-          <i class="big info icon"></i>
-          Help
+        <div class="ui pointing dropdown link item">
+          <i class="big help icon"></i>
+          <span class="text">Help</span>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item">Follow</div>
+            <div class="item">About Us</div>
+            <div class="item">FAQ's</div>
+            <div class="item">Contact Us</div>
+          </div>
+        </div>
+        <a class="item" style="margin-left:30px;">
+          <i class="big idea icon"></i>
+          How is it work
         </a>
         <div class="right menu">
           <div class="item">
@@ -32,7 +45,7 @@
             Cart
           </button>
           <a class="ui item">
-            Logout
+            Login
           </a>
         </div>
       </div>
@@ -50,15 +63,17 @@
           <div class="ui segment">
             <div class="img_wrap">
               <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
-              <p class="img_desc">{{ fish.fishdesc }}
-                <button class="ui black button">cost of fish to be implemented here</button>
+              <p class="img_desc">Hello
+                <button class="ui black button">See more</button>
               </p>
             </div>
           </div>
+          <a class="header" style="margin-left:200px;">{{ fish.fishname }}</a>
         </div>
         {% endfor %}
       </div>
     </div>
+    <div class="ui section divider"></div>
     <a class="ui black tag label" style="font-size:20px;margin-bottom:20px;margin-top:20px">Fresh water Fish</a>
     <div id="freshwater_fish">
       <div class="ui two column grid">
@@ -67,16 +82,17 @@
           <div class="ui segment">
             <div class="img_wrap">
               <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
-              <p class="img_desc">{{ fish.fishdesc }}
-                <button class="ui black button">cost of fish to be implemented here</button>
+              <p class="img_desc">Hello
+                <button class="ui black button">See more</button>
               </p>
             </div>
           </div>
+          <a class="header" style="margin-left:200px;">{{ fish.fishname }}</a>
         </div>
         {% endfor %}
       </div>
     </div>
-
+    <div class="ui section divider"></div>
     <a class="ui black tag label" style="font-size:20px;margin-bottom:20px;margin-top:20px">Shell Fish</a>
     <div id="shell_fish">
       <div class="ui two column grid">
@@ -85,15 +101,19 @@
           <div class="ui segment">
             <div class="img_wrap">
               <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
-              <p class="img_desc">{{ fish.fishdesc }}
-                <button class="ui black button">cost of fish to be implemented here</button>
+              <p class="img_desc">Hello
+                <button class="ui black button">See more</button>
               </p>
             </div>
           </div>
+          <a class="header" style="margin-left:200px;">{{ fish.fishname }}</a>
         </div>
-          {% endfor %}
+        {% endfor %}
       </div>
     </div>
+  </div>
+  <div id="footer">
+
   </div>
 </body>
 </html>

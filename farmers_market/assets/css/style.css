@@ -1,11 +1,15 @@
 #header{
-
+  position: fixed;
+  z-index:999;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 #menu{
 
 }
 #main_img{
-  margin-top: 30px;
+  margin-top: 100px;
   width: 1024px;
 }
 
@@ -21,13 +25,16 @@
 }
 
 .img_desc {
+  text-align: center;
+  padding-top: 140px;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(204, 204, 204, 0.72);
-  color: #7c7c7c;
+  background: rgba(255, 255, 255, 0.8);
+  color: #242424;
+  font-family: "Times New Roman", Times, serif;
   visibility: hidden;
   opacity: 0;
 
@@ -39,9 +46,68 @@
   visibility: visible;
   opacity: 1;
 }
+
 /*------------------------IMAGE END---------------------------------------------------*/
 
 #container{
   margin-left: 150px;
   margin-right: 150px;
+}
+
+#footer{
+  height: 100px;
+  margin-top: 50px;
+  background-color: #1B1C1D;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#fish_container{
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-top: 200px;
+  margin-bottom: 100px;
+}
+
+#img_holder{
+  height: 350px;
+  width: 500px;
+  float: left;
+  margin-right: 100px;
+}
+
+#desc_holder{
+  line-height: 50px;
+  height: 350px;
+}
+
+#fish_cut{
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+.type{
+  height: 500px;
+}
+
+.type_img{
+  width:280px;
+  height:225px;
+  margin-bottom: 10px;
+}
+
+.fish_rate{
+  font-weight: bolder;
+  margin-top: 20px;
+}
+
+#cart_container{
+  margin-left: 150px;
+  margin-right: 150px;
+  height: 100%;
+}
+
+#cart_table{
+  margin-top: 50px;
 }
