@@ -13,10 +13,10 @@ def fish(request):
 
     all_fish = fishmain.objects.filter( pk__in = available_fish_ids )
     for i in all_fish:
-        print(i.fishdesc)
-    marine_fish = FishDB.objects.filter( category = 'marine' )
-    fresh_fish = FishDB.objects.filter( category = 'Fresh Water' )
-    shell_fish = FishDB.objects.filter( category = 'Shell Fish' )
+        print(i.fishtype)
+    marine_fish = all_fish.filter( fishtype = 'm' )
+    fresh_fish = all_fish.filter( fishtype = 'f' )
+    shell_fish = all_fish.filter( fishtype = 's' )
     return render(request, 'fish_market/marine.html' , {'available_fish' : available_fish ,'all_fish' : all_fish , 'marine_fish' : marine_fish , 'fresh_fish' : fresh_fish , 'shell_fish' : shell_fish })
 
 def marine(request):
