@@ -27,12 +27,12 @@ class fishmain(models.Model):
     fishdesc = models.CharField(max_length = 5000)
     fishurl = models.URLField()
     fishtype = models.CharField(max_length = 2)
+    currentrate = models.IntegerField(default='0')
 
 class fishcurrent(models.Model):
     id = models.AutoField(primary_key = True)
     fid = models.ForeignKey(fishmain,on_delete = models.CASCADE)
     currentfish = models.IntegerField()
-    currentrate = models.IntegerField()
     wrate = models.IntegerField(default = '0')
     clrate = models.IntegerField(default = '0')
     ccrate = models.IntegerField(default = '0')

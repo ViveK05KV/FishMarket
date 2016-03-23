@@ -59,16 +59,16 @@
     <div id="marine_fish">
       <div class="ui two column grid">
         {% for fish in marine_fish %}
-        <div class="column">
+        <div class="column" align="center">
           <div class="ui segment">
             <div class="img_wrap">
               <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
-              <p class="img_desc">Hello
+              <p class="img_desc">
                 <button class="ui black button">See more</button>
               </p>
             </div>
           </div>
-          <a class="header" style="margin-left:200px;">{{ fish.fishname }}</a>
+          <a class="header">{{ fish.fishname}}/Rs{{fish.currentrate}}</a>
         </div>
         {% endfor %}
       </div>
@@ -78,16 +78,16 @@
     <div id="freshwater_fish">
       <div class="ui two column grid">
         {% for fish in fresh_fish %}
-        <div class="column">
+        <div class="column" align="center">
           <div class="ui segment">
             <div class="img_wrap">
               <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
-              <p class="img_desc">Hello
+              <p class="img_desc">
                 <button class="ui black button">See more</button>
               </p>
             </div>
           </div>
-          <a class="header" style="margin-left:200px;">{{ fish.fishname }}</a>
+          <a class="header">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
         </div>
         {% endfor %}
       </div>
@@ -97,16 +97,16 @@
     <div id="shell_fish">
       <div class="ui two column grid">
         {% for fish in shell_fish %}
-        <div class="column">
+        <div class="column" align="center">
           <div class="ui segment">
             <div class="img_wrap">
               <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
-              <p class="img_desc">Hello
+              <p class="img_desc">s
                 <button class="ui black button">See more</button>
               </p>
             </div>
           </div>
-          <a class="header" style="margin-left:200px;">{{ fish.fishname }}</a>
+          <a class="header">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
         </div>
         {% endfor %}
       </div>
