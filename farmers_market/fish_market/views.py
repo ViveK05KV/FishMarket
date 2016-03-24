@@ -19,6 +19,10 @@ def fish(request):
     shell_fish = all_fish.filter( fishtype = 's' )
     return render(request, 'fish_market/marine.html' , {'available_fish' : available_fish ,'all_fish' : all_fish , 'marine_fish' : marine_fish , 'fresh_fish' : fresh_fish , 'shell_fish' : shell_fish })
 
+def fishone(request, id):
+    fish=fishmain.objects.get(fid=id);
+    return render(request,'fish_market/afish.html' , { 'fish' :fish })
+
 def marine(request):
     fish_market = FishDB.objects.filter( category = 'marine' )
     return render(request, 'fish_market/marine.html' , {'fish_market' : fish_market})

@@ -66,20 +66,20 @@
 #fish_container{
   margin-left: 150px;
   margin-right: 150px;
-  margin-top: 200px;
+  margin-top: 150px;
   margin-bottom: 100px;
 }
 
 #img_holder{
   height: 350px;
-  width: 500px;
+  width: 450px;
   float: left;
   margin-right: 100px;
 }
 
 #desc_holder{
   line-height: 50px;
-  height: 350px;
+  height: 400px;
 }
 
 #fish_cut{

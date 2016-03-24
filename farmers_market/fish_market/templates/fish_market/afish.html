@@ -3,7 +3,7 @@
 <head>
   <title>Fish</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'  %}">
-<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="{% static 'js/jquery-1.12.0.js' %}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.css' %}">
   <script src="{% static 'dist/semantic.js' %}"></script>
@@ -56,13 +56,12 @@
   <div id="fish_container">
     <div id="fish_details">
       <div id="img_holder">
-        <img class="ui large rounded image" src="{{ fish_market.picURL }}">
-
+        <img class="ui large rounded image" src="{{ fish.fishurl }}">
       </div>
       <div id="desc_holder">
-        Fish name<br>
-        Rate/kg
-        <p>Fish details</p>
+        {{fish.fishname}}<br>
+        {{fish.currentrate}}
+        <p>{{fish.fishdesc}}</p>
       </div>
     </div>
     <div id="fish_cut" align="center">
