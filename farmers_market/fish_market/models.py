@@ -28,6 +28,9 @@ class fishmain(models.Model):
     fishurl = models.URLField()
     fishtype = models.CharField(max_length = 2)
     currentrate = models.IntegerField(default='0')
+    wimg = models.URLField(default=' ')
+    climg = models.URLField(default=' ')
+    ccimg = models.URLField(default=' ')
 
 class fishcurrent(models.Model):
     id = models.AutoField(primary_key = True)

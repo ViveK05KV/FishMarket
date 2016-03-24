@@ -21,7 +21,8 @@ def fish(request):
 
 def fishone(request, id):
     fish=fishmain.objects.get(fid=id);
-    return render(request,'fish_market/afish.html' , { 'fish' :fish })
+    rate=fishcurrent.objects.get(fid=id);
+    return render(request,'fish_market/afish.html' , { 'fish' :fish , 'rate' :rate })
 
 def marine(request):
     fish_market = FishDB.objects.filter( category = 'marine' )

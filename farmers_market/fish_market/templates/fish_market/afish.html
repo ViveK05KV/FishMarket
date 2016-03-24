@@ -69,12 +69,12 @@
         <div class="column">
           <div class="ui segment">
             <div class="type">
-              <img class="type_img" src="img/img1.jpg"/>
+              <img class="type_img" src="{{ fish.wimg }}"/>
               <div class="ui black pointing label">
                 Whole
               </div><br>
               <p class="fish_rate">
-                Rate/Kg
+                {{ rate.wrate }}\Kg
               </p>
               <div class="ui icon buttons">
                 <button class="ui button" id="whole_subtract">
@@ -98,12 +98,12 @@
         <div class="column">
           <div class="ui segment">
             <div class="type">
-              <img class="type_img" src="img/img1.jpg"/>
+              <img class="type_img" src="{{ fish.climg }}"/>
               <div class="ui black pointing label">
                 Whole Clean
               </div><br>
               <p class="fish_rate">
-                Rate/Kg
+                {{ rate.clrate }}\Kg
               </p>
               <div class="ui icon buttons">
                 <button class="ui button" id="clean_subtract">
@@ -128,12 +128,12 @@
         <div class="column">
           <div class="ui segment">
             <div class="type">
-              <img class="type_img" src=""/>
+              <img class="type_img" src="{{ fish.ccimg }}"/>
               <div class="ui black pointing label">
                 Curry Cut
               </div><br>
               <p class="fish_rate">
-                Rate/Kg
+                {{ rate.ccrate }}\Kg
               </p>
               <div class="ui icon buttons">
                 <button class="ui button" id="cut_subtract">

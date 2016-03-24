@@ -8,11 +8,6 @@
   <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.min.css' %}">
   <script src="{% static 'dist/semantic.min.js' %}"></script>
   <script src="{% static 'js/dropdown.js' %}"></script>
-  <style>
-    a{
-      color: #ffffff;
-    }
-  </style>
 </head>
 <body>
   <div id="header">
@@ -70,7 +65,7 @@
               <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
               <p class="img_desc">
                 <button class="ui black button">
-                  <a href="/fish/one/{{ fish.fid }}">See more</a>
+                  <a class="fish_link" href="/fish/one/{{ fish.fid }}">See more</a>
                 </button>
               </p>
             </div>
@@ -91,7 +86,7 @@
               <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
               <p class="img_desc">
                 <button class="ui black button">
-                  <a href="/fish/one/{{ fish.fid }}">See more</a>
+                  <a class="fish_link" href="/fish/one/{{ fish.fid }}">See more</a>
                 </button>
               </p>
             </div>
@@ -112,7 +107,7 @@
               <img src="{{ fish.fishurl}}" style="width:480px;height:325px"/>
               <p class="img_desc">
                 <button class="ui black button">
-                  <a href="/fish/one/{{ fish.fid }}">See more</a>
+                  <a class="fish_link" href="/fish/one/{{ fish.fid }}">See more</a>
                 </button>
               </p>
             </div>
