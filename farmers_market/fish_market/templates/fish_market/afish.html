@@ -66,94 +66,99 @@
     </div>
     <div id="fish_cut" align="center">
       <div class="ui three column grid">
-        <div class="column">
-          <div class="ui segment">
-            <div class="type">
-              <img class="type_img" src="{{ fish.wimg }}"/>
-              <div class="ui black pointing label">
-                Whole
-              </div><br>
-              <p class="fish_rate">
-                {{ rate.wrate }}\Kg
-              </p>
-              <div class="ui icon buttons">
-                <button class="ui button" id="whole_subtract">
-                  <i class="minus icon"></i>
-                </button>
-                <button class="ui button" id="whole_counter">
-                </button>
-                <button class="ui button" id="whole_add">
-                  <i class="plus icon"></i>
-                </button>
-              </div>
-              <p class="fish_rate">
-                Total : 000
-              </p>
-              <button class="ui black button">Add to cart
-                <i class="add to cart icon"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="ui segment">
-            <div class="type">
-              <img class="type_img" src="{{ fish.climg }}"/>
-              <div class="ui black pointing label">
-                Whole Clean
-              </div><br>
-              <p class="fish_rate">
-                {{ rate.clrate }}\Kg
-              </p>
-              <div class="ui icon buttons">
-                <button class="ui button" id="clean_subtract">
-                  <i class="minus icon"></i>
-                </button>
-                <button class="ui button" id="clean_counter">
-                </button>
-                <button class="ui button" id="clean_add">
-                  <i class="plus icon"></i>
+        {% if rate.wrate != 0 %}
+          <div class="column">
+            <div class="ui segment">
+              <div class="type">
+                <img class="type_img" src="{{ fish.wimg }}"/>
+                <div class="ui black pointing label">
+                  Whole
+                </div><br>
+                <p class="fish_rate">
+                  <label id="w_rate">{{ rate.wrate }}</label>\Kg
+                </p>
+                <div class="ui icon buttons">
+                  <button class="ui button" id="whole_subtract">
+                    <i class="minus icon"></i>
+                  </button>
+                  <button class="ui button" id="whole_counter">
+                  </button>
+                  <button class="ui button" id="whole_add">
+                    <i class="plus icon"></i>
+                  </button>
+                </div>
+                <p class="fish_rate">
+                  <label id="w_value" >0Kg</label>
+                </p>
+                <button class="ui black button">Add to cart
+                  <i class="add to cart icon"></i>
                 </button>
               </div>
-              <p class="fish_rate">
-                Total : 000
-              </p>
-              <button class="ui black button">Add to cart
-                <i class="add to cart icon"></i>
-              </button>
             </div>
           </div>
-        </div>
-
-        <div class="column">
-          <div class="ui segment">
-            <div class="type">
-              <img class="type_img" src="{{ fish.ccimg }}"/>
-              <div class="ui black pointing label">
-                Curry Cut
-              </div><br>
-              <p class="fish_rate">
-                {{ rate.ccrate }}\Kg
-              </p>
-              <div class="ui icon buttons">
-                <button class="ui button" id="cut_subtract">
-                  <i class="minus icon"></i>
-                </button>
-                <button class="ui button" id="cut_counter">
-                </button>
-                <button class="ui button" id="cut_add">
-                  <i class="plus icon"></i>
+        {% endif %}
+        {% if rate.clrate != 0 %}
+          <div class="column">
+            <div class="ui segment">
+              <div class="type">
+                <img class="type_img" src="{{ fish.climg }}"/>
+                <div class="ui black pointing label">
+                  Whole Clean
+                </div><br>
+                <p class="fish_rate">
+                  <label id="cl_rate">{{ rate.clrate }}</label>\Kg
+                </p>
+                <div class="ui icon buttons">
+                  <button class="ui button" id="clean_subtract">
+                    <i class="minus icon"></i>
+                  </button>
+                  <button class="ui button" id="clean_counter">
+                  </button>
+                  <button class="ui button" id="clean_add">
+                    <i class="plus icon"></i>
+                  </button>
+                </div>
+                <p class="fish_rate">
+                  <label id="cl_value" >0Kg</label>
+                </p>
+                <button class="ui black button">Add to cart
+                  <i class="add to cart icon"></i>
                 </button>
               </div>
-              <p class="fish_rate">
-                Total : 000
-              </p>
-              <button class="ui black button">Add to cart
-                <i class="add to cart icon"></i>
-              </button>
             </div>
           </div>
-        </div>
+        {% endif %}
+        {% if rate.ccrate != 0 %}
+          <div class="column">
+            <div class="ui segment">
+              <div class="type">
+                <img class="type_img" src="{{ fish.ccimg }}"/>
+                <div class="ui black pointing label">
+                  Curry Cut
+                </div><br>
+                <p class="fish_rate">
+                  <label id="cc_rate">{{ rate.ccrate }}</label>\Kg
+                </p>
+                <div class="ui icon buttons">
+                  <button class="ui button" id="cut_subtract">
+                    <i class="minus icon"></i>
+                  </button>
+                  <button class="ui button" id="cut_counter">
+                  </button>
+                  <button class="ui button" id="cut_add">
+                    <i class="plus icon"></i>
+                  </button>
+                </div>
+                <p class="fish_rate">
+                  <label id="cc_value" >0Kg</label>
+                </p>
+                <button class="ui black button">Add to cart
+                  <i class="add to cart icon"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
