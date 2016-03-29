@@ -4,7 +4,13 @@
   <title>Fish</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'  %}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-  <script src="{% static 'js/jquery-1.12.0.js' %}"></script>
+  <script>
+            function addCart(cartid) {
+                $.get('create_cookie', function (data) {
+                    alert("cart updated!");
+                });
+            }
+        </script>
   <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.css' %}">
   <script src="{% static 'dist/semantic.js' %}"></script>
   <script src="{% static 'js/dropdown.js' %}"> </script>
@@ -90,7 +96,7 @@
                 <p class="fish_rate">
                   <label id="w_value" >0Kg</label>
                 </p>
-                <button class="ui black button">Add to cart
+                <button class="ui black button" OnClick="addCart()" >Add to cart
                   <i class="add to cart icon"></i>
                 </button>
               </div>

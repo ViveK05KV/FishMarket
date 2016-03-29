@@ -12,8 +12,6 @@ def fish(request):
     tag = request.GET.get('name', None)
 
     all_fish = fishmain.objects.filter( pk__in = available_fish_ids )
-    for i in all_fish:
-        print(i.fishtype)
     marine_fish = all_fish.filter( fishtype = 'm' )
     fresh_fish = all_fish.filter( fishtype = 'f' )
     shell_fish = all_fish.filter( fishtype = 's' )
@@ -39,9 +37,8 @@ def shell(request):
 
 def fishDetails(request):
 # Get an instance of a logger
-    logger = logging.getLogger(__name__)
     tag = request.GET.get('name', None)
-    logger.error("the tag is "+ tag)
+
 
     try:
         fishThings = FishDB.objects.filter( name = tag )

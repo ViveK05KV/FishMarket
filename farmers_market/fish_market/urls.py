@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
+from . import cart
 
 urlpatterns = [
     url(r'^home', views.fish),
@@ -9,6 +10,7 @@ urlpatterns = [
     url(r'^shell', views.shell),
     url(r'^fishDetails/$', views.fishDetails , name='details' ),
     url(r'^one/(?P<id>\d+)$',views.fishone, name='fishone' ),
+    url(r'^one/create_cookie/',cart.create_cookie),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -123,3 +123,7 @@ STATIC_URL = '/assets/'
 STATICFILES_DIRS = (
 os.path.join(BASE_DIR, 'assets'),
 )
+
+# Custom session area ; overrides the default django session settings
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 3
+# keeps session for three days.

@@ -50,3 +50,14 @@ class issue(models.Model):
     id = models.AutoField(primary_key = True)
     uid = models.ForeignKey(registration,on_delete = models.CASCADE)
     userissue = models.CharField(max_length = 5000)
+
+class CartItem(models.Model):
+    """ model class containing information each Product instance in the customer's shopping cart """
+    cart_id = models.CharField(max_length=50, db_index=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    quantity = models.IntegerField(default=1)
+    product = models.ForeignKey(fishmain, unique=False)
+
+    class Meta:
+        db_table = 'cart_items'
+        ordering = ['date_added']
