@@ -12,12 +12,17 @@ import random
 
 CART_ID_SESSION_KEY = 'cart_id'
 def create_cookie(request):
+     postdata = request.POST.copy()
+     Product = postdata.get('Product','')
+     quantity = postdata.get('quantity','')
+     print("post data is:" + Product + " and quantity" + quantity )
      cartid = _cart_id(request)
      print(cartid)
-     fish_market = FishDB.objects.filter( category = 'marine' )
-     response = render(request, 'fish_market/marine.html' , {'fish_market' : fish_market})
+     add_to_cart(request)
+     response = render(request, 'fish_market/cart.html' )
      response.set_cookie('cart_id', cartid)
      return response
+
 
     #_cart_id(request.COOKIES.get('cartid', ''))
      #response.set_cookie( 'cartid', CART_ID_SESSION_KEY )
@@ -52,17 +57,17 @@ def add_to_cart(request):
     """ function that takes a POST request and adds a product instance to the current customer's shopping cart """
     postdata = request.POST.copy()
     # get product slug from post data, return blank if empty
-    product_slug = postdata.get('product_slug','')
+    product = postdata.get('Product','')
     # get quantity added, return 1 if empty
     quantity = postdata.get('quantity',1)
     # fetch the product or return a missing page error
-    p = get_object_or_404(Product, slug=product_slug)
+    p = get_object_or_404(fishmain, fid=product)
     #get products in cart
     cart_products = get_cart_items(request)
     product_in_cart = False
     # check to see if item is already in cart
     for cart_item in cart_products:
-        if cart_item.product.id == p.id:
+        if cart_item.product.fid == p.fid:
             # update the quantity if found
             cart_item.augment_quantity(quantity)
             product_in_cart = True

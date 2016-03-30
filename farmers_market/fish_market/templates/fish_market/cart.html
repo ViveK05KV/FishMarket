@@ -1,0 +1,117 @@
+{% load static from staticfiles %}
+<html>
+<head>
+  <title>Main</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.min.css' %}">
+  <script src="{% static  'dist/semantic.min.js' %}"></script>
+  <script src="{% static 'js/dropdown.js' %}"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="ui inverted segment" id="menu">
+      <div class="ui inverted secondary  menu">
+        <a class="item" style="font-size:20px;margin-left:50px;" href="index.html">Logo</a>
+        <a class="item" style="margin-right:40px;margin-left:70px;" href="index.html">
+          <i class="big home icon"></i>
+          Home
+        </a>
+        <div class="ui pointing dropdown link item">
+          <i class="big help icon"></i>
+          <span class="text">Help</span>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item">Follow</div>
+            <div class="item">About Us</div>
+            <div class="item">FAQ's</div>
+            <div class="item">Contact Us</div>
+          </div>
+        </div>
+        <a class="item" style="margin-left:30px;">
+          <i class="big idea icon"></i>
+          How is it work
+        </a>
+        <div class="right menu">
+          <div class="item">
+            <div class="ui icon input">
+              <input type="text" placeholder="Search...">
+              <i class="search link icon"></i>
+            </div>
+          </div>
+          <button class="ui inverted button">
+            <i class="Add to cart icon"></i>
+            Cart
+          </button>
+          <a class="ui item">
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cart_container">
+    <h4 class="ui horizontal divider header" style="margin-top:150px;">
+      <i class="tag icon"></i>
+      Cart
+    </h4>
+
+    <table class="ui black table" id="cart_table">
+      <thead class="full-width">
+        <tr>
+          <th></th>
+          <th>Item</th>
+          <th>Price/Kg</th>
+          <th>Qty</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="collapsing">
+            <button class="ui icon button">
+              <i class="big trash icon"></i>
+            </button>
+          </td>
+          <td>Fish Name</td>
+          <td>price</td>
+          <td>quantity</td>
+          <td>total</td>
+        </tr>
+        <tr>
+
+      </tbody>
+      <tfoot class="full-width">
+        <tr>
+          <th></th>
+          <th colspan="4">
+            <div class="ui right floated small black labeled icon button">
+               <i class="rupee icon"></i>Check out
+            </div>
+            <div class="ui small black button">
+              Clear cart
+            </div>
+            <div class="ui small black button">
+              Update cart
+            </div>
+            <div class="ui small black button">
+              Continue
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <td id="total">Grand Total</td>
+          <td>0.00</td>
+        </tr>
+      </tfoot>
+    </table>
+
+
+  </div>
+
+  <div id="footer">
+
+  </div>
+</body>
+</html>

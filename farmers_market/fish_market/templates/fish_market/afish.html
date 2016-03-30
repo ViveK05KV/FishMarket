@@ -5,11 +5,23 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'  %}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>
-            function addCart(cartid) {
-                $.get('create_cookie', function (data) {
-                    alert("cart updated!");
-                });
-            }
+  $(document).ready(function() {
+$("#test").submit(function(event){
+    $.ajax({
+         type:"POST",
+         url:"create_cookie/",
+         data: {
+                'Product':  document.getElementById("fid").value ,// from form
+                'quantity' : document.getElementById("whole_counter").innerHTML
+                },
+         success: function(){
+             $('#message').html("<h2>Contact Form Submitted!</h2>")
+         }
+    });
+    return false; //<---- move it here
+});
+
+});
         </script>
   <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.css' %}">
   <script src="{% static 'dist/semantic.js' %}"></script>
@@ -96,9 +108,19 @@
                 <p class="fish_rate">
                   <label id="w_value" >0Kg</label>
                 </p>
-                <button class="ui black button" OnClick="addCart()" >Add to cart
+                <form method='post' id ='test'>
+                  {% csrf_token %}
+    
+     <input type="hidden" id="fid" value="{{ fish.fid }}" />
+
+
+
+                <button class="ui black button"  type='submit'>Add to cart
                   <i class="add to cart icon"></i>
                 </button>
+                <div id = 'message'>Initial text</div>
+
+            </form>
               </div>
             </div>
           </div>
