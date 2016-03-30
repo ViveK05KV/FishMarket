@@ -14,9 +14,9 @@ $("#test").submit(function(event){
                 'Product':  document.getElementById("fid").value ,// from form
                 'quantity' : document.getElementById("whole_counter").innerHTML
                 },
-         success: function(){
-             $('#message').html("<h2>Contact Form Submitted!</h2>")
-         }
+                success: function(){
+                            window.location.href = "showcart";
+                        }
     });
     return false; //<---- move it here
 });
@@ -110,7 +110,7 @@ $("#test").submit(function(event){
                 </p>
                 <form method='post' id ='test'>
                   {% csrf_token %}
-    
+
      <input type="hidden" id="fid" value="{{ fish.fid }}" />
 
 

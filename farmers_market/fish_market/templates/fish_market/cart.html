@@ -68,17 +68,19 @@
         </tr>
       </thead>
       <tbody>
+        {% for item in cart_items %}
         <tr>
           <td class="collapsing">
             <button class="ui icon button">
               <i class="big trash icon"></i>
             </button>
           </td>
-          <td>Fish Name</td>
+          <td> {{ item.fid }}</td>
           <td>price</td>
-          <td>quantity</td>
+          <td> {{ item.quantity }}</td>
           <td>total</td>
         </tr>
+        {% endfor %}
         <tr>
 
       </tbody>
