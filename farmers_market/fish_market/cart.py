@@ -69,8 +69,8 @@ def add_to_cart(request):
     for cart_item in cart_products:
         if cart_item.product.fid == p.fid:
             # update the quantity if found
-            # error in logic -- aswin
             cart_item.quantity += int(quantity)
+            cart_item.save()
             product_in_cart = True
     if not product_in_cart:
         # create and save a new cart item

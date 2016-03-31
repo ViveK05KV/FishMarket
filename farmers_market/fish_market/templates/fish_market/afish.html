@@ -109,18 +109,11 @@ $("#test").submit(function(event){
                   <label id="w_value" >0Kg</label>
                 </p>
                 <form method='post' id ='test'>
-                  {% csrf_token %}
-
-     <input type="hidden" id="fid" value="{{ fish.fid }}" />
-
-
-
-                <button class="ui black button"  type='submit'>Add to cart
+                  <input type="hidden" id="fid" value="{{ fish.fid }}" />
+                  <button class="ui black button"  type='submit'>Add to cart
                   <i class="add to cart icon"></i>
-                </button>
-                <div id = 'message'>Initial text</div>
-
-            </form>
+                  </button>
+                </form>
               </div>
             </div>
           </div>
