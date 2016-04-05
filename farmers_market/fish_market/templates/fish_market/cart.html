@@ -7,13 +7,14 @@
   <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.min.css' %}">
   <script src="{% static  'dist/semantic.min.js' %}"></script>
   <script src="{% static 'js/dropdown.js' %}"></script>
+  <script src="{% static 'js/test.js' %}"></script>
 </head>
 <body>
   <div id="header">
     <div class="ui inverted segment" id="menu">
       <div class="ui inverted secondary  menu">
         <a class="item" style="font-size:20px;margin-left:50px;" href="index.html">Logo</a>
-        <a class="item" style="margin-right:40px;margin-left:70px;" href="index.html">
+        <a class="item" style="margin-right:40px;margin-left:70px;" href="/fish/home">
           <i class="big home icon"></i>
           Home
         </a>
@@ -39,10 +40,10 @@
               <i class="search link icon"></i>
             </div>
           </div>
-          <button class="ui inverted button">
+          <a class="ui inverted button" href="/fish/one/showcart/">
             <i class="Add to cart icon"></i>
             Cart
-          </button>
+          </a>
           <a class="ui item">
             Login
           </a>
@@ -71,9 +72,12 @@
         {% for item in cart_items %}
         <tr>
           <td class="collapsing">
-            <button class="ui icon button">
+            <form method='post' id ='test'>
+              <input type="hidden" id="item_id" value="{{ item.cart_id }}" />
+              <button class="ui icon button"  type='submit'>
               <i class="big trash icon"></i>
-            </button>
+              </button>
+            </form>
           </td>
           <td> {{ item.fid }}</td>
           <td>price</td>
@@ -97,9 +101,9 @@
             <div class="ui small black button">
               Update cart
             </div>
-            <div class="ui small black button">
+            <a class="ui small black button" href="/fish/home">
               Continue
-            </div>
+            </a>
           </th>
         </tr>
         <tr>
