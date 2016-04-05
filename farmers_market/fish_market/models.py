@@ -12,9 +12,11 @@ class registration(models.Model):
     fname = models.CharField(max_length = 100)
     lname = models.CharField(max_length = 100)
     mobileno = models.IntegerField()
-    email = models.CharField(max_length = 100)
+    email = models.EmailField(max_length = 100)
     address1 = models.CharField(max_length = 1000)
     address2 = models.CharField(max_length = 1000)
+    username = models.CharField(max_length=100,unique = True)
+    password = models.CharField(max_length=100,unique = True)
 
 class login(models.Model):
     uid = models.ForeignKey(registration,on_delete=models.CASCADE)

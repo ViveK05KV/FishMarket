@@ -1,0 +1,35 @@
+{% load static from staticfiles %}
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login_style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="{% static 'js/login.js' %}"></script>
+  </head>
+  <body>
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Login</h1>
+			</div>
+			<div class="login-form">
+        <form method="post" name="loginform" id="logintest">{% csrf_token %}
+          <div class="control-group">
+            <input type="text" class="login-field" placeholder="username" id="login-name">
+            <label class="login-field-icon fui-user" for="login-name"></label>
+          </div>
+
+          <div class="control-group">
+            <input type="password" class="login-field" placeholder="password" id="login-pass">
+            <label class="login-field-icon fui-lock" for="login-pass"></label>
+          </div>
+          <input type="submit" class="btn btn-primary btn-large btn-block" value="submit" />
+          <a class="login-link" href="#">Lost your password?</a>
+          <a class="login-link" href="/fish/register/">Not a member Sign Up Now?</a>
+        </form>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

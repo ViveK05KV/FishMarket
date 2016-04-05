@@ -1,0 +1,16 @@
+postdata = request.POST.copy()
+  name = postdata.get('username','')
+  password = postdata.get('password','')
+  user = login.objects.filter(username=name,password=password)
+  for i in user:
+      print(i.username,i.password,i.uid)
+  uidd=i.uid
+  print(uidd)
+  if user.exists():
+      print("Login sucess")
+      #create_cookie(request)
+      request.session['userid'] = uidd
+      return render(request, 'fish_market/cart.html' )
+  else:
+      print("Login failed")
+      return render(request, 'fish_market/login.html' )

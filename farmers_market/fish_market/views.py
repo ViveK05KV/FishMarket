@@ -1,8 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import logging
-
+from django import forms
+from django.middleware.csrf import CsrfViewMiddleware
+from django.template import RequestContext
 from .models import *
+from django.shortcuts import render_to_response
+from django.contrib.sessions.middleware import SessionMiddleware
+import datetime
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.db.models import Max
+from django.http import HttpRequest
+from datetime import datetime, timedelta
+import decimal
+import random
+import json
 # Create your views here.
 
 def fish(request):
@@ -12,8 +25,6 @@ def fish(request):
     tag = request.GET.get('name', None)
 
     all_fish = fishmain.objects.filter( pk__in = available_fish_ids )
-    for i in all_fish:
-        print(i.fishtype)
     marine_fish = all_fish.filter( fishtype = 'm' )
     fresh_fish = all_fish.filter( fishtype = 'f' )
     shell_fish = all_fish.filter( fishtype = 's' )
@@ -48,3 +59,41 @@ def fishDetails(request):
     except fishThings.DoesNotExist:
         raise Http404
     return render(request, 'fish_market/afish.html' , {'fish_market' : fishThings})
+
+
+
+def loginview(request):
+    return render(request, 'fish_market/login.html' )
+
+
+def loginaction(request):
+    postdata = request.POST.copy()
+
+    try:
+        user = login.objects.get(username=postdata.get('username',''))
+        if user.password == postdata.get('password',''):
+            request.session['user_id'] = user.id
+            data = {'userid':user.id}
+            print(request.session['user_id'])
+        else:
+            request.session['user_id'] = 0
+            del request.session['user_id']
+            data = {'userid':0}
+    except Exception as e:
+        print("Error")
+        request.session['user_id'] = 0
+        del request.session['user_id']
+        data = {'userid':0}
+
+    return HttpResponse(json.dumps(data))
+
+def logoutaction(request):
+    try:
+        del request.session['user_id']
+    except KeyError:
+        pass
+    return HttpResponse("You're logged out.")
+
+
+def registeraction(request):
+    return render(request, 'fish_market/register.html' )

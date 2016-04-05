@@ -1,0 +1,64 @@
+{% load static from staticfiles %}
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Register Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login_style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  </head>
+  <body>
+  	<div class="login">
+  		<div class="login-screen">
+  			<div class="app-title">
+  				<h1>Registration</h1>
+  			</div>
+
+  			<div class="login-form">
+
+          <div class="control-group">
+          <input type="text" class="login-field" value="" placeholder="First name" id="reg-fname">
+          <label class="login-field-icon fui-lock" for="login-pass"></label>
+          </div>
+
+          <div class="control-group">
+          <input type="text" class="login-field" value="" placeholder="Last name" id="reg-lname">
+          <label class="login-field-icon fui-lock" for="login-pass"></label>
+          </div>
+
+          <div class="control-group">
+          <input type="text" class="login-field" value="" placeholder="Mobile no" id="reg-mno">
+          <label class="login-field-icon fui-lock" for="login-pass"></label>
+          </div>
+
+          <div class="control-group">
+          <input type="text" class="login-field" value="" placeholder="Email" id="reg-email">
+          <label class="login-field-icon fui-lock" for="login-pass"></label>
+          </div>
+
+          <div class="control-group">
+          <textarea type="text" class="login-field" value="" placeholder="Address 1" id="reg-address1"></textarea>
+          <label class="login-field-icon fui-lock" for="login-pass"></label>
+          </div>
+
+          <div class="control-group">
+          <textarea type="text" class="login-field" value="" placeholder="Address 2" id="reg-address2"></textarea>
+          <label class="login-field-icon fui-lock" for="login-pass"></label>
+          </div>
+
+  				<div class="control-group">
+  				<input type="text" class="login-field" value="" placeholder="username" id="reg-name">
+  				<label class="login-field-icon fui-user" for="login-name"></label>
+  				</div>
+
+  				<div class="control-group">
+  				<input type="password" class="login-field" value="" placeholder="password" id="reg-pass">
+  				<label class="login-field-icon fui-lock" for="login-pass"></label>
+  				</div>
+
+  				<a class="btn btn-primary btn-large btn-block" href="#">Sign Up</a>
+  				<a class="login-link" href="/fish/login/">Already a member?</a>
+  			</div>
+  		</div>
+  	</div>
+  </body>
+</html>

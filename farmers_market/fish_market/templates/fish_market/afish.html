@@ -9,14 +9,14 @@
   <script src="{% static 'dist/semantic.js' %}"></script>
   <script src="{% static 'js/dropdown.js' %}"> </script>
   <script src="{% static 'js/counter.js' %}"></script>
+  <script src="{% static 'js/jsfile.js' %}"></script>
 </head>
 <body>
-
   <div id="header">
     <div class="ui inverted segment" id="menu">
       <div class="ui inverted secondary  menu">
         <a class="item" style="font-size:20px;margin-left:50px;" href="index.html">Logo</a>
-        <a class="item" style="margin-right:40px;margin-left:70px;" href="index.html">
+        <a class="item" style="margin-right:40px;margin-left:70px;" href="/fish/home">
           <i class="big home icon"></i>
           Home
         </a>
@@ -46,9 +46,7 @@
             <i class="Add to cart icon"></i>
             Cart
           </button>
-          <a class="ui item">
-            Login
-          </a>
+          <a id="login_disp" class="ui item" href="/fish/login/">Login</a>
         </div>
       </div>
     </div>
