@@ -81,8 +81,8 @@ def add_to_cart(request):
         ci.save()
 
 def get_single_item(request, item_id):
-    print("cartitem")
-    return get_object_or_404(CartItem, id=item_id, cart_id=_cart_id(request))
+    print("cartitemid " + item_id)
+    return get_object_or_404(CartItem, product=item_id, cart_id=_cart_id(request))
 
 # update quantity for single item
 def update_cart(request):
@@ -109,13 +109,13 @@ def remove_from_cart(request):
     print("hello")
     postdata = request.POST.copy()
     item_id = postdata['item_id']
-    print(item_id)
+    print("item id is:" + item_id)
     cart_item = get_single_item(request, item_id)
     print("cartitem ok")
     print(cart_item.quantity)
     if cart_item:
         cart_item.delete()
-
+    return HttpResponse('Ok')
 def cart_subtotal(request):
     """ gets the subtotal for the current shopping cart """
     cart_total = decimal.Decimal('0.00')
@@ -135,6 +135,7 @@ def empty_cart(request):
     """ empties the shopping cart of the current customer """
     user_cart = get_cart_items(request)
     user_cart.delete()
+    return HttpResponse('Ok')
 
 def remove_old_cart_items():
     """ 1. calculate date of 90 days ago (or session lifespan)

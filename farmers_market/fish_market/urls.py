@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^fishDetails/$', views.fishDetails , name='details' ),
     url(r'^one/(?P<id>\d+)$',views.fishone, name='fishone' ),
     url(r'^one/showcart/deleteitem/',cart.remove_from_cart),
+    url(r'^one/showcart/emptycart/',cart.empty_cart),
     url(r'^one/create_cookie/',cart.create_cookie),
     url(r'^one/showcart/',cart.showcart),
 

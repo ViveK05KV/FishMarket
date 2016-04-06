@@ -51,70 +51,79 @@
       </div>
     </div>
   </div>
+  <form id="form_id" class="" action="index.html" method="post">
 
-  <div id="cart_container">
-    <h4 class="ui horizontal divider header" style="margin-top:150px;">
-      <i class="tag icon"></i>
-      Cart
-    </h4>
+  </form>
+    <div id="cart_container">
+      <h4 class="ui horizontal divider header" style="margin-top:150px;">
+        <i class="tag icon"></i>
+        Cart
+      </h4>
 
-    <table class="ui black table" id="cart_table">
-      <thead class="full-width">
-        <tr>
-          <th></th>
-          <th>Item</th>
-          <th>Price/Kg</th>
-          <th>Qty</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in cart_items %}
-        <tr>
-          <td class="collapsing">
-            <form method='post' id ='test'>
-              <input type="hidden" id="item_id" value="{{ item.cart_id }}" />
-              <button class="ui icon button"  type='submit'>
-              <i class="big trash icon"></i>
+      <table class="ui black table" id="cart_table">
+        <thead class="full-width">
+          <tr>
+            <th></th>
+            <th>Item</th>
+            <th>Price/Kg</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart_items %}
+          <tr>
+            <td class="collapsing">
+              <form method='post' id ='item_del'>
+                <input type="hidden" id="item_id" value="{{ item.product.fid }}" />
+                <button class="ui icon button"  type='submit'>
+                <i class="big trash icon"></i>
+                </button>
+              </form>
+            </td>
+            <td> {{ item.product.fid }}</td>
+            <td>{{ item.product.currentrate }}</td>
+            <td> {{ item.quantity }}</td>
+            <td>
+              <script>
+                var a = "{{ item.product.currentrate }}";
+                var b = "{{ item.quantity }}";
+                var c=a*b;
+                document.write(c);
+              </script>
+            </td>
+          </tr>
+          {% endfor %}
+          <tr>
+
+        </tbody>
+        <tfoot class="full-width">
+          <tr>
+            <th></th>
+            <th colspan="4">
+              <div class="ui right floated small black labeled icon button">
+                 <i class="rupee icon"></i>Check out
+              </div>
+              <button id="cart_clr" class="ui small black button">
+                Clear cart
               </button>
-            </form>
-          </td>
-          <td> {{ item.fid }}</td>
-          <td>price</td>
-          <td> {{ item.quantity }}</td>
-          <td>total</td>
-        </tr>
-        {% endfor %}
-        <tr>
-
-      </tbody>
-      <tfoot class="full-width">
-        <tr>
-          <th></th>
-          <th colspan="4">
-            <div class="ui right floated small black labeled icon button">
-               <i class="rupee icon"></i>Check out
-            </div>
-            <div class="ui small black button">
-              Clear cart
-            </div>
-            <div class="ui small black button">
-              Update cart
-            </div>
-            <a class="ui small black button" href="/fish/home">
-              Continue
-            </a>
-          </th>
-        </tr>
-        <tr>
-          <td id="total">Grand Total</td>
-          <td>0.00</td>
-        </tr>
-      </tfoot>
-    </table>
+              <div class="ui small black button">
+                Update cart
+              </div>
+              <a class="ui small black button" href="/fish/home">
+                Continue
+              </a>
+            </th>
+          </tr>
+          <tr>
+            <td id="total">Grand Total</td>
+            <td>0.00</td>
+          </tr>
+        </tfoot>
+      </table>
 
 
-  </div>
+    </div>
 
   <div id="footer">
 
