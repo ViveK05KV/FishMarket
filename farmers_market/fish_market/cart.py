@@ -81,8 +81,8 @@ def add_to_cart(request):
         ci.save()
 
 def get_single_item(request, item_id):
-    print("cartitem")
-    return get_object_or_404(CartItem, id=item_id, cart_id=_cart_id(request))
+    print("cartitemid " + item_id)
+    return get_object_or_404(CartItem, product=item_id, cart_id=_cart_id(request))
 
 # update quantity for single item
 def update_cart(request):
@@ -109,7 +109,7 @@ def remove_from_cart(request):
     print("hello")
     postdata = request.POST.copy()
     item_id = postdata['item_id']
-    print(item_id)
+    print("item id is:" + item_id)
     cart_item = get_single_item(request, item_id)
     print("cartitem ok")
     print(cart_item.quantity)

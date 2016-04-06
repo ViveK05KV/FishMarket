@@ -73,14 +73,14 @@
         <tr>
           <td class="collapsing">
             <form method='post' id ='test'>
-              <input type="hidden" id="item_id" value="{{ item.cart_id }}" />
+              <input type="hidden" id="item_id" value="{{ item.product.fid }}" />
               <button class="ui icon button"  type='submit'>
               <i class="big trash icon"></i>
               </button>
             </form>
           </td>
-          <td> {{ item.fid }}</td>
-          <td>price</td>
+          <td> {{ item.product.fid }}</td>
+          <td>{{ item.product.currentrate }}</td>
           <td> {{ item.quantity }}</td>
           <td>total</td>
         </tr>
