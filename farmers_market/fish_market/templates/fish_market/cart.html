@@ -4,10 +4,14 @@
   <title>Main</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="{% static 'js/new_counter.js' %}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/sty.css' %}">
   <script src="{% static  'dist/semantic.min.js' %}"></script>
   <script src="{% static 'js/dropdown.js' %}"></script>
   <script src="{% static 'js/test.js' %}"></script>
+  <script src="{% static 'js/counter.js' %}"></script>
+  <script src="{% static 'js/new_counter.js' %}"></script>
 </head>
 <body>
   <div id="header">
@@ -83,7 +87,13 @@
             </td>
             <td> {{ item.product.fid }}</td>
             <td>{{ item.product.currentrate }}</td>
-            <td> {{ item.quantity }}</td>
+            <td>
+              <div>
+                <div class="dec button">-</div>
+                <input class="c_val" type="text" value={{ item.quantity }} />
+                <div class="inc button">+</div>
+              </div>
+            </td>
             <td>
               <script>
                 var a = "{{ item.product.currentrate }}";
