@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $("#item_del").submit(function(event){
+      console.log("hiiii");
       $.ajax({
            type:"POST",
            url:"deleteitem/",

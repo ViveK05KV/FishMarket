@@ -12,6 +12,18 @@
   <script src="{% static 'js/test.js' %}"></script>
   <script src="{% static 'js/counter.js' %}"></script>
   <script src="{% static 'js/new_counter.js' %}"></script>
+  <script type="text/javascript">
+   var q=0;
+      function sum(c)
+      {
+        if(c!=0){
+          q=q+c;
+        }
+        else{
+            document.write(q);
+        }
+      }
+</script>
 </head>
 <body>
   <div id="header">
@@ -87,19 +99,14 @@
             </td>
             <td> {{ item.product.fid }}</td>
             <td>{{ item.product.currentrate }}</td>
-            <td>
-              <div>
-                <div class="dec button">-</div>
-                <input class="c_val" type="text" value={{ item.quantity }} />
-                <div class="inc button">+</div>
-              </div>
-            </td>
-            <td>
+            <td>{{ item.quantity }}</td>
+            <td id="price">
               <script>
                 var a = "{{ item.product.currentrate }}";
                 var b = "{{ item.quantity }}";
                 var c=a*b;
                 document.write(c);
+                sum(c);
               </script>
             </td>
           </tr>
@@ -117,9 +124,6 @@
               <button id="cart_clr" class="ui small black button">
                 Clear cart
               </button>
-              <div class="ui small black button">
-                Update cart
-              </div>
               <a class="ui small black button" href="/fish/home">
                 Continue
               </a>
@@ -127,7 +131,9 @@
           </tr>
           <tr>
             <td id="total">Grand Total</td>
-            <td>0.00</td>
+            <td>
+              <script>sum(0);</script>
+            </td>
           </tr>
         </tfoot>
       </table>

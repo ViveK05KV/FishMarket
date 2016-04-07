@@ -17,7 +17,14 @@ $(document).ready(function(){
           if(newValue>=0){
               $parent.find('.inc').addClass('a'+newValue);
               $input.val(newValue);
+              console.log("-");
               incrementVar += newValue;
             }
   });
+  var a=0;
+  function sum(x){
+    a=a+x;
+    console.log("here");
+    document.write(a);
+  }
 });
