@@ -4,26 +4,10 @@
   <title>Main</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-  <script src="{% static 'js/new_counter.js' %}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.min.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/sty.css' %}">
   <script src="{% static  'dist/semantic.min.js' %}"></script>
   <script src="{% static 'js/dropdown.js' %}"></script>
   <script src="{% static 'js/test.js' %}"></script>
-  <script src="{% static 'js/counter.js' %}"></script>
-  <script src="{% static 'js/new_counter.js' %}"></script>
-  <script type="text/javascript">
-   var q=0;
-      function sum(c)
-      {
-        if(c!=0){
-          q=q+c;
-        }
-        else{
-            document.write(q);
-        }
-      }
-</script>
 </head>
 <body>
   <div id="header">
@@ -67,79 +51,70 @@
       </div>
     </div>
   </div>
-  <form id="form_id" class="" action="index.html" method="post">
 
-  </form>
-    <div id="cart_container">
-      <h4 class="ui horizontal divider header" style="margin-top:150px;">
-        <i class="tag icon"></i>
-        Cart
-      </h4>
+  <div id="cart_container">
+    <h4 class="ui horizontal divider header" style="margin-top:150px;">
+      <i class="tag icon"></i>
+      Cart
+    </h4>
 
-      <table class="ui black table" id="cart_table">
-        <thead class="full-width">
-          <tr>
-            <th></th>
-            <th>Item</th>
-            <th>Price/Kg</th>
-            <th>Qty</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in cart_items %}
-          <tr>
-            <td class="collapsing">
-              <form method='post' id ='item_del'>
-                <input type="hidden" id="item_id" value="{{ item.product.fid }}" />
-                <button class="ui icon button"  type='submit'>
-                <i class="big trash icon"></i>
-                </button>
-              </form>
-            </td>
-            <td> {{ item.product.fishname }}</td>
-            <td>{{ item.product.currentrate }}</td>
-            <td>{{ item.quantity }}</td>
-            <td id="price">
-              <script>
-                var a = "{{ item.product.currentrate }}";
-                var b = "{{ item.quantity }}";
-                var c=a*b;
-                document.write(c);
-                sum(c);
-              </script>
-            </td>
-          </tr>
-          {% endfor %}
-          <tr>
-
-        </tbody>
-        <tfoot class="full-width">
-          <tr>
-            <th></th>
-            <th colspan="4">
-              <div class="ui right floated small black labeled icon button">
-                 <i class="rupee icon"></i>Check out
-              </div>
-              <button id="cart_clr" class="ui small black button">
-                Clear cart
+    <table class="ui black table" id="cart_table">
+      <thead class="full-width">
+        <tr>
+          <th></th>
+          <th>Item</th>
+          <th>Price/Kg</th>
+          <th>Qty</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+        <tr>
+          <td class="collapsing">
+            <form method='post' id ='test'>
+              <input type="hidden" id="item_id" value="{{ item.product.fid }}" />
+              <button class="ui icon button"  type='submit'>
+              <i class="big trash icon"></i>
               </button>
-              <a class="ui small black button" href="/fish/home">
-                Continue
-              </a>
-            </th>
-          </tr>
-          <tr>
-            <td id="total">Grand Total</td>
-            <td>
-              <script>sum(0);</script>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+            </form>
+          </td>
+          <td> {{ item.product.fid }}</td>
+          <td>{{ item.product.currentrate }}</td>
+          <td> {{ item.quantity }}</td>
+          <td>total</td>
+        </tr>
+        {% endfor %}
+        <tr>
+
+      </tbody>
+      <tfoot class="full-width">
+        <tr>
+          <th></th>
+          <th colspan="4">
+            <div class="ui right floated small black labeled icon button">
+               <i class="rupee icon"></i>Check out
+            </div>
+            <div class="ui small black button">
+              Clear cart
+            </div>
+            <div class="ui small black button">
+              Update cart
+            </div>
+            <a class="ui small black button" href="/fish/home">
+              Continue
+            </a>
+          </th>
+        </tr>
+        <tr>
+          <td id="total">Grand Total</td>
+          <td>0.00</td>
+        </tr>
+      </tfoot>
+    </table>
 
 
-    </div>
+  </div>
 
   <div id="footer">
 
