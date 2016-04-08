@@ -33,7 +33,7 @@ class fishmain(models.Model):
     ccimg = models.URLField(default=' ')
 
 class fishcurrent(models.Model):
-    id = models.AutoField(primary_key = True)
+    id = models.IntegerField(primary_key = True)
     fid = models.ForeignKey(fishmain,on_delete = models.CASCADE)
     currentfish = models.IntegerField()
     wrate = models.IntegerField(default = '0')

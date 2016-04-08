@@ -1,0 +1,59 @@
+{% load static from staticfiles %}
+
+<html>
+<head>
+<title>Creative Forms  Responsive Widget Template | Home :: w3layouts</title>
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Creative Forms Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!--google fonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+<!--google fonts-->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>$(document).ready(function(c) {
+			$('.contact-close').on('click', function(c){
+				$('.contact-text').fadeOut('slow', function(c){
+					$('.contact-text').remove();
+				});
+				});
+			});
+</script>
+<script>$(document).ready(function(c) {
+		$('.small-contact-close').on('click', function(c){
+			$('.small-contact-text').fadeOut('slow', function(c){
+				$('.small-contact-text').remove();
+			});
+			});
+		});
+   </script>
+</head>
+<body>
+<!--header strat here-->
+<div class="element">
+
+	<div class="element-block2">
+		<div class="element-block2-right">
+		   <div class="signup">
+			   <h3>Create An Account</h3>
+			   <h4>Create Account</h4>
+			  <form action="/accounts/register/" method="post">{% csrf_token %}
+			  	 <input class="email" type="text" placeholder="Email" required="">
+			  	  <input class="user" type="text" placeholder="Username" required="">
+			  	  <input class="lock" type="password" placeholder="Password" required="">
+			  	  <input class="lock" type="password" placeholder="Password" required="">
+			  	  <input type="submit" value="Register">
+			  </form>
+
+			  <div class="clear"> </div>
+		   </div>
+		</div>
+	   <div class="clear"> </div>
+	</div>
+</div>
+<!--header end here-->
+
+</body>
+</html>
