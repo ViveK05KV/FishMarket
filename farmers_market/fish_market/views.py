@@ -6,8 +6,8 @@ from .models import *
 # Create your views here.
 
 def fish(request):
-    available_fish_ids = fishcurrent.objects.values_list('fid', flat=True).exclude(currentfish = 0)
-    available_fish = fishcurrent.objects.exclude(currentfish = 0)
+    available_fish_ids = fishcurrent.objects.values_list('fid', flat=True).exclude(currentfish__lt=3)
+    available_fish = fishcurrent.objects.exclude(currentfish__lt=3)
     logger = logging.getLogger(__name__)
     tag = request.GET.get('name', None)
 

@@ -42,7 +42,7 @@
           </div>
           <a class="ui inverted button" href="/fish/one/showcart/">
             <i class="Add to cart icon"></i>
-            Cart
+            Cart(<script>document.write(localStorage.getItem("count"));</script>)
           </a>
           <a class="ui item">
             Login
@@ -70,7 +70,7 @@
               </p>
             </div>
           </div>
-          <a class="header">{{ fish.fishname}}/Rs{{fish.currentrate}}</a>
+          <a class="ui black label">{{ fish.fishname}}/Rs{{fish.currentrate}}</a>
         </div>
         {% endfor %}
       </div>
@@ -91,7 +91,7 @@
               </p>
             </div>
           </div>
-          <a class="header">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
+          <a  class="ui black label">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
         </div>
         {% endfor %}
       </div>
@@ -112,7 +112,7 @@
               </p>
             </div>
           </div>
-          <a class="header">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
+          <a  class="ui black label">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
         </div>
         {% endfor %}
       </div>

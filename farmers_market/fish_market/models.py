@@ -56,7 +56,23 @@ class CartItem(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField(default=1)
     product = models.ForeignKey(fishmain, unique=False)
+    ft = models.CharField(max_length=10)
 
     class Meta:
         db_table = 'cart_items'
         ordering = ['date_added']
+
+class ftype(models.Model):
+    cart_id = models.ForeignKey(CartItem, unique=False)
+    ft = models.CharField(max_length=10)
+
+class order(models.Model):
+    id = models.AutoField(primary_key = True)
+    uid = models.CharField(max_length = 100)
+    fname = models.CharField(max_length = 100)
+    lname = models.CharField(max_length = 100)
+    address = models.CharField(max_length = 500)
+    landmark = models.CharField(max_length = 500)
+    pincode = models.CharField(max_length = 50)
+    phoneno = models.CharField(max_length = 50)
+    cart_id = models.CharField(max_length=50)

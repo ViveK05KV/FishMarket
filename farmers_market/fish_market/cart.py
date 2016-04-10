@@ -9,12 +9,14 @@ from django.http import HttpRequest
 from datetime import datetime, timedelta
 import decimal
 import random
+from fish_market.models import ftype
 
 CART_ID_SESSION_KEY = 'cart_id'
 def create_cookie(request):
      postdata = request.POST.copy()
      Product = postdata.get('Product','')
      quantity = postdata.get('quantity','')
+     ftype = postdata.get('ftype','')
      print("post data is:" + Product + " and quantity" + quantity )
      cartid = _cart_id(request)
      print(cartid)
@@ -59,7 +61,10 @@ def add_to_cart(request):
     # get product slug from post data, return blank if empty
     product = postdata.get('Product','')
     # get quantity added, return 1 if empty
-    quantity = postdata.get('quantity',1)
+    #quantity = postdata.get('quantity',1)
+    quantity = 0
+    quantity = postdata.get('quantity','')
+    ftype = postdata.get('ftype','')
     # fetch the product or return a missing page error
     p = get_object_or_404(fishmain, fid=product)
     #get products in cart
@@ -68,21 +73,33 @@ def add_to_cart(request):
     # check to see if item is already in cart
     for cart_item in cart_products:
         if cart_item.product.fid == p.fid:
-            # update the quantity if found
-            cart_item.quantity += int(quantity)
-            cart_item.save()
-            product_in_cart = True
+            if cart_item.ft == ftype:
+                # update the quantity if found
+                cart_item.quantity += int(quantity)
+                cart_item.save()
+                product_in_cart = True
+                p1=fishcurrent.objects.filter(fid=product)
+                p1.currentfish=p1.currentfish-int(quantity)
+                p1.save()
     if not product_in_cart:
         # create and save a new cart item
+        print(ftype)
+        print(quantity)
         ci = CartItem()
         ci.product = p
         ci.quantity = quantity
+        ci.ft = ftype
         ci.cart_id = _cart_id(request)
         ci.save()
+        p1=fishcurrent.objects.get(fid=product)
+        p1.currentfish=p1.currentfish-int(quantity)
+        p1.save()
 
-def get_single_item(request, item_id):
+def get_single_item(request, item_id , item_type):
     print("cartitemid " + item_id)
-    return get_object_or_404(CartItem, product=item_id, cart_id=_cart_id(request))
+    print("_________________________________________");
+    return get_object_or_404(CartItem, product=item_id, ft=item_type, cart_id=_cart_id(request))
+
 
 # update quantity for single item
 def update_cart(request):
@@ -106,16 +123,15 @@ def remove_from_cart(request):
     """ function that takes a POST request removes a single product instance from the current customer's
     shopping cart
     """
-    print("hello")
     postdata = request.POST.copy()
     item_id = postdata['item_id']
-    print("item id is:" + item_id)
-    cart_item = get_single_item(request, item_id)
-    print("cartitem ok")
-    print(cart_item.quantity)
+    item_type = postdata['item_type']
+    print(item_id)
+    cart_item = get_single_item(request, item_id , item_type)
+    print("ok")
     if cart_item:
         cart_item.delete()
-
+    return HttpResponse('Ok')
 def cart_subtotal(request):
     """ gets the subtotal for the current shopping cart """
     cart_total = decimal.Decimal('0.00')
@@ -135,6 +151,9 @@ def empty_cart(request):
     """ empties the shopping cart of the current customer """
     user_cart = get_cart_items(request)
     user_cart.delete()
+    _id=_cart_id(request)
+    CartItem.objects.filter(cart_id=_id).delete()
+    return HttpResponse('Ok')
 
 def remove_old_cart_items():
     """ 1. calculate date of 90 days ago (or session lifespan)
@@ -161,4 +180,43 @@ def update_session(request):
 
 def showcart(request):
     items = get_cart_items(request)
-    return render(request,'fish_market/cart.html',{'cart_items' : items})
+    count = CartItem.objects.filter(cart_id=_cart_id(request)).count()
+    fish = fishcurrent.objects.all()
+    return render(request,'fish_market/cart.html',{'cart_items' : items ,'fish' : fish,'count' : count})
+
+
+def checkout(request):
+    return render(request, 'fish_market/checkout.html' , {})
+
+def thanks(request):
+    return render(request, 'fish_market/thanku.html' , {})
+
+def subform(request):
+    postdata = request.POST.copy()
+    fname = postdata.get('fname','')
+    lname = postdata.get('lname','')
+    address = postdata.get('address','')
+    landmark = postdata.get('landmark','')
+    pincode = postdata.get('pincode','')
+    phone = postdata.get('phone','')
+    cartid = _cart_id(request)
+    orderitem = order.objects.filter(cart_id = cartid)
+    print("one")
+    if not orderitem:
+        print("two")
+        oi = order()
+        oi.uid = '0'
+        oi.fname = fname
+        oi.lname = lname
+        oi.address = address
+        oi.landmark = landmark
+        oi.pincode = pincode
+        oi.phoneno = phone
+        oi.cart_id = cartid
+        oi.save()
+        user_cart = get_cart_items(request)
+        user_cart.delete()
+        _id=_cart_id(request)
+        CartItem.objects.filter(cart_id=_id).delete()
+        del request.session[CART_ID_SESSION_KEY]
+    return HttpResponse('ok')

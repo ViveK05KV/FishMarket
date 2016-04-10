@@ -6,12 +6,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script>
   $(document).ready(function() {
-$("#test").submit(function(event){
+$("#test_w").submit(function(event){
     $.ajax({
          type:"POST",
          url:"create_cookie/",
          data: {
                 'Product':  document.getElementById("fid").value ,// from form
+                'ftype':  'w',
                 'quantity' : document.getElementById("whole_counter").innerHTML
                 },
                 success: function(){
@@ -20,7 +21,37 @@ $("#test").submit(function(event){
     });
     return false; //<---- move it here
 });
-
+$("#test_cl").submit(function(event){
+  console.log("cl")
+    $.ajax({
+         type:"POST",
+         url:"create_cookie/",
+         data: {
+                'Product':  document.getElementById("fid").value ,// from form
+                'ftype':  'cl' ,
+                'quantity' : document.getElementById("clean_counter").innerHTML
+                },
+                success: function(){
+                            window.location.href = "showcart";
+                        }
+    });
+    return false; //<---- move it here
+});
+$("#test_cc").submit(function(event){
+    $.ajax({
+         type:"POST",
+         url:"create_cookie/",
+         data: {
+                'Product':  document.getElementById("fid").value ,// from form
+                'ftype':  'cc' ,
+                'quantity' : document.getElementById("cut_counter").innerHTML
+                },
+                success: function(){
+                            window.location.href = "showcart";
+                        }
+    });
+    return false; //<---- move it here
+});
 });
         </script>
   <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.css' %}">
@@ -62,7 +93,7 @@ $("#test").submit(function(event){
           </div>
           <a class="ui inverted button" href="/fish/one/showcart/">
             <i class="Add to cart icon"></i>
-            Cart
+            Cart(<script>document.write(localStorage.getItem("count"));</script>)
           </a>
           <a class="ui item">
             Login
@@ -106,9 +137,9 @@ $("#test").submit(function(event){
                   </button>
                 </div>
                 <p class="fish_rate">
-                  <label id="w_value" >0Kg</label>
+                  <label id="w_value" >0Rs</label>
                 </p>
-                <form method='post' id ='test'>
+                <form method='post' id ='test_w'>
                   <input type="hidden" id="fid" value="{{ fish.fid }}" />
                   <button class="ui black button"  type='submit'>Add to cart
                   <i class="add to cart icon"></i>
@@ -118,7 +149,7 @@ $("#test").submit(function(event){
             </div>
           </div>
         {% endif %}
-        {% if rate.clrate != 0 %}
+        {% if rate.clrate != 0 and rate.currentfish >= 4 %}
           <div class="column">
             <div class="ui segment">
               <div class="type">
@@ -140,16 +171,19 @@ $("#test").submit(function(event){
                   </button>
                 </div>
                 <p class="fish_rate">
-                  <label id="cl_value" >0Kg</label>
+                  <label id="cl_value" >0Rs</label>
                 </p>
-                <button class="ui black button">Add to cart
+                <form method='post' id ='test_cl'>
+                  <input type="hidden" id="fid" value="{{ fish.fid }}" />
+                  <button class="ui black button"  type='submit'>Add to cart
                   <i class="add to cart icon"></i>
-                </button>
+                  </button>
+                </form>
               </div>
             </div>
           </div>
         {% endif %}
-        {% if rate.ccrate != 0 %}
+        {% if rate.ccrate != 0 and rate.currentfish >= 5 %}
           <div class="column">
             <div class="ui segment">
               <div class="type">
@@ -171,11 +205,14 @@ $("#test").submit(function(event){
                   </button>
                 </div>
                 <p class="fish_rate">
-                  <label id="cc_value" >0Kg</label>
+                  <label id="cc_value" >0Rs</label>
                 </p>
-                <button class="ui black button">Add to cart
+                <form method='post' id ='test_cc'>
+                  <input type="hidden" id="fid" value="{{ fish.fid }}" />
+                  <button class="ui black button"  type='submit'>Add to cart
                   <i class="add to cart icon"></i>
-                </button>
+                  </button>
+                </form>
               </div>
             </div>
           </div>
