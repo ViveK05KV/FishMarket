@@ -1,0 +1,63 @@
+{% load static from staticfiles %}
+
+<html>
+<head>
+<title>Register</title>
+<!--<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/> -->
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Creative Forms Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!--google fonts
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+google fonts-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+$("#reg").submit(function(event){
+	console.log( document.getElementById("password1").value)
+	$.ajax({
+			 type:"POST",
+			 url:"userregister/",
+			 data: {
+							'email':  document.getElementById("email").value ,// from form
+							'username':   document.getElementById("user").value,
+							'password1' : document.getElementById("password1").innerHTML
+							},
+							success: function(){
+													window.location.href = "showcart";
+											}
+	});
+	return false; //<---- move it here
+});
+});
+	 </script>
+</head>
+<body>
+<!--header strat here-->
+<div class="element">
+	<div class="element-block2">
+		<div class="element-block2-right">
+		   <div class="signup">
+			   <h3>Create An Account</h3>
+			   <h4>Create Account</h4>
+			  <form method='post' id ='reg'>
+					{% csrf_token %}
+			  	 <input id="email" type="text" placeholder="Email" required="">
+			  	  <input id="user" type="text" placeholder="Username" required="">
+			  	  <input id="password1" type="password" placeholder="Password" required="">
+			  	  <input id="password2" type="password" placeholder="Password" required="">
+			  	  <button type="submit" value="Register">Register</button>
+			  </form>
+
+			  <div class="clear"> </div>
+		   </div>
+		</div>
+	   <div class="clear"> </div>
+	</div>
+</div>
+<!--header end here-->
+
+</body>
+</html>

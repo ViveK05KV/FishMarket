@@ -1,10 +1,19 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 import logging
 
 from .models import *
+from .forms import *
 # Create your views here.
 
+def cart_after_login(request):
+    return render(request,'fish_market/cart.html')
+
+def registerpage(request):
+    return render(request,'fish_market/register.html')
 def fish(request):
     available_fish_ids = fishcurrent.objects.values_list('fid', flat=True).exclude(currentfish = 0)
     available_fish = fishcurrent.objects.exclude(currentfish = 0)
@@ -48,3 +57,30 @@ def fishDetails(request):
     except fishThings.DoesNotExist:
         raise Http404
     return render(request, 'fish_market/afish.html' , {'fish_market' : fishThings})
+
+
+@csrf_exempt
+def register(request, template_name="registration/register.html"):
+    """ view displaying customer registration form """
+    if request.method == 'POST':
+        print("request method is post" )
+        postdata = request.POST.copy()
+        form = RegistrationForm(postdata)
+        if form.is_valid():
+            #form.save()
+            user = form.save(commit=False)  # new
+            user.email = postdata.get('email','')  # new
+            user.save()  # new
+            un = postdata.get('username','')
+            pw = postdata.get('password1','')
+            from django.contrib.auth import login, authenticate
+            new_user = authenticate(username=un, password=pw)
+            if new_user and new_user.is_active:
+                login(request, new_user)
+                url = urlresolvers.reverse('my_account')
+                return HttpResponseRedirect(url)
+    else:
+        print("RegistrationForm is valid" )
+        form = RegistrationForm()
+    page_title = 'User Registration'
+    return render(request, 'fish_market/success.html' )
