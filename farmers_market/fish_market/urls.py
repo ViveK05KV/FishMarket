@@ -12,7 +12,7 @@ urlpatterns = [
     url('^register/', CreateView.as_view(
             template_name='registration/register.html',
             form_class=RegistrationForm,
-            success_url='/fish/login'
+            success_url='/fish/home'
     ),
     name='registration'),
      url(
@@ -21,14 +21,9 @@ urlpatterns = [
         name='login',
         kwargs={'template_name': 'registration/login.html'}
     ),
-    url(
-        r'^logout/$',
-        'django.contrib.auth.views.logout',
-        name='logout',
-        kwargs={'next_page': '/fish/home'}
-    ),
+    url(r'^logout/$',views.logout_view),
     url('^accounts/', include('django.contrib.auth.urls')),
-    url('^accounts/login/cart',  views.cart_after_login),
+    url('^accounts/login/home',  views.cart_after_login),
     url(r'^userregister', views.register),
     url(r'^marine', views.marine),
     url(r'^fresh', views.fresh),

@@ -4,13 +4,15 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 import logging
+from django.http import HttpResponseRedirect
+from django.contrib.auth import logout
 
 from .models import *
 from .forms import *
 # Create your views here.
 
 def cart_after_login(request):
-    return render(request,'fish_market/cart.html')
+    return HttpResponseRedirect("/fish/home")
 
 def registerpage(request):
     return render(request,'fish_market/register.html')
@@ -84,3 +86,8 @@ def register(request, template_name="registration/register.html"):
         form = RegistrationForm()
     page_title = 'User Registration'
     return render(request, 'fish_market/success.html' )
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect("/fish/home")

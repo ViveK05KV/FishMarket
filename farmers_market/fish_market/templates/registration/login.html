@@ -9,7 +9,7 @@
 {{ form }}
 </table>
 <input type="submit" value="login" />
-<input type="hidden" name="next" value="cart" />
+<input type="hidden" name="next" value="home" />
 </form>
 {% if user.is_authenticated %}
     <p>Welcome, {{ user.username }}  <a href="{% url 'fish_market:logout' %}">[logout]</a></p>
