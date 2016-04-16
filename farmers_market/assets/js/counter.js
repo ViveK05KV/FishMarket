@@ -8,33 +8,33 @@ $(document).ready(function(){
   var clrate = $("#cl_rate").text();
 
   // Display total
-  $("#whole_counter").text(whole_counter+"kg");
-  $("#clean_counter").text(clean_counter+"kg");
-  $("#cut_counter").text(cut_counter+"kg");
+  $("#whole_counter").text(whole_counter);
+  $("#clean_counter").text(clean_counter);
+  $("#cut_counter").text(cut_counter);
 
   // When button is clicked
   $("#whole_add").click(function(){
     //Add 10 to counter
     whole_counter = whole_counter + 1;
   	// Display total
-  	$("#whole_counter").text(whole_counter+"kg");
-    $("#w_value").text(wrate*whole_counter+"kg");
+  	$("#whole_counter").text(whole_counter);
+    $("#w_value").text(wrate*whole_counter+" Rs");
   });
 
   $("#clean_add").click(function(){
     //Add 10 to counter
     clean_counter = clean_counter + 1;
     // Display total
-    $("#clean_counter").text(clean_counter+"kg");
-    $("#cl_value").text(clrate*clean_counter+"kg");
+    $("#clean_counter").text(clean_counter);
+    $("#cl_value").text(clrate*clean_counter+"Rs");
   });
 
   $("#cut_add").click(function(){
     //Add 10 to counter
     cut_counter = cut_counter + 1;
     // Display total
-    $("#cut_counter").text(cut_counter+"kg");
-    $("#cc_value").text(ccrate*cut_counter+"kg");
+    $("#cut_counter").text(cut_counter);
+    $("#cc_value").text(ccrate*cut_counter+"Rs");
   });
 
   //Subtract
@@ -44,8 +44,8 @@ $(document).ready(function(){
     }
     else {
       whole_counter = whole_counter - 1;
-      $("#whole_counter").text(whole_counter+"kg");
-      $("#w_value").text(wrate*whole_counter+"kg");
+      $("#whole_counter").text(whole_counter);
+      $("#w_value").text(wrate*whole_counter+"Rs");
     }
 
   });
@@ -55,8 +55,8 @@ $(document).ready(function(){
     }
     else {
       clean_counter = clean_counter - 1;
-      $("#clean_counter").text(clean_counter+"kg");
-      $("#cl_value").text(clrate*clean_counter+"kg");
+      $("#clean_counter").text(clean_counter);
+      $("#cl_value").text(clrate*clean_counter+"Rs");
     }
 
   });
@@ -66,8 +66,8 @@ $(document).ready(function(){
     }
     else {
       cut_counter = cut_counter - 1;
-      $("#cut_counter").text(cut_counter+"kg");
-      $("#cc_value").text(ccrate*cut_counter+"kg");
+      $("#cut_counter").text(cut_counter);
+      $("#cc_value").text(ccrate*cut_counter+"Rs");
     }
 
   });

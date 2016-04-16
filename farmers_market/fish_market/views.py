@@ -1,30 +1,37 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import HttpResponse
+import logging
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-import logging
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
 from .models import *
 from .forms import *
+import json
+from django.core import serializers
+from django.http import JsonResponse
 # Create your views here.
 
 def cart_after_login(request):
-    return HttpResponseRedirect("/fish/home")
+    if request.user.is_authenticated() and request.user.is_superuser:
+        orderdetails = order.objects.all()
+        items = CartItem.objects.all()
+        return render(request,'fish_market/admin.html' , {'order' : orderdetails,'items' : items})
+    else:
+        return HttpResponseRedirect("/fish/home")
 
 def registerpage(request):
     return render(request,'fish_market/register.html')
+
 def fish(request):
-    available_fish_ids = fishcurrent.objects.values_list('fid', flat=True).exclude(currentfish = 0)
-    available_fish = fishcurrent.objects.exclude(currentfish = 0)
+    available_fish_ids = fishcurrent.objects.values_list('fid', flat=True).exclude(currentfish__lt=3)
+    available_fish = fishcurrent.objects.exclude(currentfish__lt=3)
     logger = logging.getLogger(__name__)
     tag = request.GET.get('name', None)
 
     all_fish = fishmain.objects.filter( pk__in = available_fish_ids )
-    for i in all_fish:
-        print(i.fishtype)
     marine_fish = all_fish.filter( fishtype = 'm' )
     fresh_fish = all_fish.filter( fishtype = 'f' )
     shell_fish = all_fish.filter( fishtype = 's' )
@@ -50,15 +57,15 @@ def shell(request):
 
 def fishDetails(request):
 # Get an instance of a logger
-    logger = logging.getLogger(__name__)
     tag = request.GET.get('name', None)
-    logger.error("the tag is "+ tag)
+
 
     try:
         fishThings = FishDB.objects.filter( name = tag )
     except fishThings.DoesNotExist:
         raise Http404
     return render(request, 'fish_market/afish.html' , {'fish_market' : fishThings})
+
 
 
 @csrf_exempt
@@ -91,3 +98,30 @@ def register(request, template_name="registration/register.html"):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/fish/home")
+
+
+def getitems(request):
+    postdata = request.POST.copy()
+    idd = postdata.get('id','')
+    print("________________________________")
+    print(idd)
+    citems = CartItem.objects.filter(cart_id = '2(%u7OWGjKxbsbhVP)Q!zJG()Fyl1Xzu%Y3%99^vK)Gjm5oMFU')
+    for i in citems:
+        print(i.id)
+    #arr = []
+    #for data in citems:
+    #    arr.append({
+    #        'cart_id': data.cart_id,
+    #        'date_added': data.date_added,
+    #        'quantity': data.quantity,
+    #        'product': data.product,
+    #        'ft': data.ft,
+    #    })
+    #print("Ok")
+    #data = serializers.serialize('json', arr)
+    #data = serializers.serialize('json', [citems,])
+    #return JsonResponse({'data':data}, safe=True)
+    #data = serializers.serialize("json", arr)
+    #return HttpResponse(data, mimetype='application/json')
+    #return HttpResponse(arr, content_type='application/json')
+    return HttpResponse(citems)

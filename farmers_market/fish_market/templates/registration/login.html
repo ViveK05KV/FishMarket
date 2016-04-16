@@ -1,19 +1,73 @@
+{% load static from staticfiles %}
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'  %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'  %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'dist/semantic.css' %}">
+  <script src="{% static 'dist/semantic.js' %}"></script>
+  <script src="{% static 'js/dropdown.js' %}"> </script>
+  <script src="{% static 'js/counter.js' %}"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="ui inverted segment" id="menu">
+      <div class="ui inverted secondary  menu">
+        <a class="item" style="font-size:20px;margin-left:50px;" href="index.html">Logo</a>
+        <a class="item" style="margin-right:40px;margin-left:70px;" href="../home">
+          <i class="big home icon"></i>
+          Home
+        </a>
+        <div class="ui pointing dropdown link item">
+          <i class="big help icon"></i>
+          <span class="text">Help</span>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item">Follow</div>
+            <div class="item">About Us</div>
+            <div class="item">FAQ's</div>
+            <div class="item">Contact Us</div>
+          </div>
+        </div>
+        <a class="item" style="margin-left:30px;">
+          <i class="big idea icon"></i>
+          How is it work
+        </a>
+        <div class="right menu">
+          <div class="item">
+            <div class="ui icon input">
+              <input type="text" placeholder="Search...">
+              <i class="search link icon"></i>
+            </div>
+          </div>
+          <a class="ui inverted button" href="/fish/one/showcart/">
+            <i class="Add to cart icon"></i>
+            Cart(<script>document.write(localStorage.getItem("count"));</script>)
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="login_div">
+    {% block content %}
+      {% if form.errors %}
+        <script>alert("Your username and password didn't match. Please try again.");</script>
+      {% else %}
+        <form class="ui form" method="post" action="{% url 'fish_market:login' %}">
+      {% endif %}
+        {% csrf_token %}
+        <table>
+        {{ form }}
+        </table>
+      <input class="ui button" type="submit" value="login" />
+      <input type="hidden" name="next" value="home" /><br />
+      <a id="btn" href="{% url 'fish_market:registration' %}" >Register</a>
+      </form>
+    {% endblock %}
+  </div>
+  <div id="footer">
 
-{% block content %}
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-<form method="post" action="{% url 'fish_market:login' %}">
-{% csrf_token %}
-<table>
-{{ form }}
-</table>
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="home" />
-</form>
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}  <a href="{% url 'fish_market:logout' %}">[logout]</a></p>
-{% else %}
-    <p>Welcome, Guest <a href="{% url 'fish_market:registration' %}">[Register]</a></p>
-{% endif %}
-{% endblock %}
+  </div>
+</body>
+</html>

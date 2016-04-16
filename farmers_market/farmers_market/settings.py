@@ -44,7 +44,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -123,3 +122,7 @@ STATIC_URL = '/assets/'
 STATICFILES_DIRS = (
 os.path.join(BASE_DIR, 'assets'),
 )
+
+# Custom session area ; overrides the default django session settings
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 3
+# keeps session for three days.

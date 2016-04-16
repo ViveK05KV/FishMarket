@@ -1,0 +1,33 @@
+#reg_div{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 120px;
+  height: 100%;
+  width: 700px;
+}
+
+#reg_div label{
+  margin-bottom: 20px;
+}
+
+#reg_div input[type="text"]{
+  width: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#reg_div input[type="password"]{
+  width: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#reg_div input[type="email"]{
+  width: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.helptext{
+
+}

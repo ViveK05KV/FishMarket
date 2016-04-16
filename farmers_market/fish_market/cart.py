@@ -1,0 +1,229 @@
+from .models import *
+import datetime
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.db.models import Max
+from django.http import HttpRequest
+from datetime import datetime, timedelta
+import decimal
+import random
+from fish_market.models import ftype
+
+
+CART_ID_SESSION_KEY = 'cart_id'
+def create_cookie(request):
+     postdata = request.POST.copy()
+     Product = postdata.get('Product','')
+     quantity = postdata.get('quantity','')
+     ftype = postdata.get('ftype','')
+     print("post data is:" + Product + " and quantity" + quantity )
+     cartid = _cart_id(request)
+     print(cartid)
+     add_to_cart(request)
+     response = render(request, 'fish_market/cart.html' )
+     response.set_cookie('cart_id', cartid)
+     return response
+
+
+    #_cart_id(request.COOKIES.get('cartid', ''))
+     #response.set_cookie( 'cartid', CART_ID_SESSION_KEY )
+
+
+def _cart_id(request):
+    """ get the current user's cart id, sets new one if blank;
+    Note: the syntax below matches the text, but an alternative,
+    clearer way of checking for a cart ID would be the following:
+
+    if not CART_ID_SESSION_KEY in request.session:
+
+    """
+    if request.session.get(CART_ID_SESSION_KEY,'') == '':
+        request.session[CART_ID_SESSION_KEY] = _generate_cart_id()
+    return request.session[CART_ID_SESSION_KEY]
+
+def _generate_cart_id():
+    """ function for generating random cart ID values """
+    cart_id = ''
+    characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()'
+    cart_id_length = 50
+    for y in range(cart_id_length):
+        cart_id += characters[random.randint(0, len(characters)-1)]
+    return cart_id
+
+def get_cart_items(request):
+    """ return all items from the current user's cart """
+    return CartItem.objects.filter(cart_id=_cart_id(request))
+
+def add_to_cart(request):
+    """ function that takes a POST request and adds a product instance to the current customer's shopping cart """
+    postdata = request.POST.copy()
+    # get product slug from post data, return blank if empty
+    product = postdata.get('Product','')
+    # get quantity added, return 1 if empty
+    #quantity = postdata.get('quantity',1)
+    quantity = 0
+    quantity = postdata.get('quantity','')
+    ftype = postdata.get('ftype','')
+    # fetch the product or return a missing page error
+    p = get_object_or_404(fishmain, fid=product)
+    #get products in cart
+    cart_products = get_cart_items(request)
+    product_in_cart = False
+    # check to see if item is already in cart
+    for cart_item in cart_products:
+        if cart_item.product.fid == p.fid:
+            if cart_item.ft == ftype:
+                # update the quantity if found
+                cart_item.quantity += int(quantity)
+                cart_item.save()
+                product_in_cart = True
+                p1=fishcurrent.objects.filter(fid=product)
+                p1.currentfish=p1.currentfish-int(quantity)
+                p1.save()
+    if not product_in_cart:
+        # create and save a new cart item
+        print(ftype)
+        print(quantity)
+        ci = CartItem()
+        ci.product = p
+        ci.quantity = quantity
+        ci.ft = ftype
+        ci.cart_id = _cart_id(request)
+        ci.save()
+        p1=fishcurrent.objects.get(fid=product)
+        p1.currentfish=p1.currentfish-int(quantity)
+        p1.save()
+
+def get_single_item(request, item_id , item_type):
+    print("cartitemid " + item_id)
+    print("_________________________________________");
+    return get_object_or_404(CartItem, product=item_id, ft=item_type, cart_id=_cart_id(request))
+
+
+# update quantity for single item
+def update_cart(request):
+    """ function takes a POST request that updates the quantity for single product instance in the
+    current customer's shopping cart
+
+    """
+    postdata = request.POST.copy()
+    item_id = postdata['item_id']
+    quantity = postdata['quantity']
+    cart_item = get_single_item(request, item_id)
+    if cart_item:
+        if int(quantity) > 0:
+            cart_item.quantity = int(quantity)
+            cart_item.save()
+        else:
+            remove_from_cart(request)
+
+# remove a single item from cart
+def remove_from_cart(request):
+    """ function that takes a POST request removes a single product instance from the current customer's
+    shopping cart
+    """
+    postdata = request.POST.copy()
+    item_id = postdata['item_id']
+    item_type = postdata['item_type']
+    print(item_id)
+    cart_item = get_single_item(request, item_id , item_type)
+    print("ok")
+    if cart_item:
+        cart_item.delete()
+    return HttpResponse('Ok')
+def cart_subtotal(request):
+    """ gets the subtotal for the current shopping cart """
+    cart_total = decimal.Decimal('0.00')
+    cart_products = get_cart_items(request)
+    for cart_item in cart_products:
+        cart_total += cart_item.product.price * cart_item.quantity
+    return cart_total
+
+# returns the total number of items in the user's cart
+def cart_distinct_item_count(request):
+    return get_cart_items(request).count()
+
+def is_empty(request):
+    return cart_distinct_item_count(request) == 0
+
+def empty_cart(request):
+    """ empties the shopping cart of the current customer """
+    user_cart = get_cart_items(request)
+    user_cart.delete()
+    _id=_cart_id(request)
+    CartItem.objects.filter(cart_id=_id).delete()
+    return HttpResponse('Ok')
+
+def remove_old_cart_items():
+    """ 1. calculate date of 90 days ago (or session lifespan)
+    2. create a list of cart IDs that haven't been modified
+    3. delete those CartItem instances
+
+    """
+    print("Removing old carts")
+    remove_before = datetime.now() + timedelta(days=-settings.SESSION_COOKIE_DAYS)
+    cart_ids = []
+    old_items = CartItem.objects.values('cart_id').annotate(last_change=Max('date_added')).filter(last_change__lt=remove_before).order_by()
+    for item in old_items:
+        cart_ids.append(item['cart_id'])
+    to_remove = CartItem.objects.filter(cart_id__in=cart_ids)
+    to_remove.delete()
+    print(str(len(cart_ids)) + " carts were removed")
+
+def update_session(request):
+    if not request.is_ajax() or not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+
+    request.session['mykey'] = 'myvalue'
+    return HttpResponse('ok')
+
+def showcart(request):
+    items = get_cart_items(request)
+    count = CartItem.objects.filter(cart_id=_cart_id(request)).count()
+    fish = fishcurrent.objects.all()
+    return render(request,'fish_market/cart.html',{'cart_items' : items ,'fish' : fish,'count' : count})
+
+
+def checkout(request):
+
+    return render(request, 'fish_market/checkout.html' , {})
+
+def thanks(request):
+    return render(request, 'fish_market/thanku.html' , {})
+
+def subform(request):
+    postdata = request.POST.copy()
+    fname = postdata.get('fname','')
+    lname = postdata.get('lname','')
+    address = postdata.get('address','')
+    landmark = postdata.get('landmark','')
+    pincode = postdata.get('pincode','')
+    phone = postdata.get('phone','')
+    cartid = _cart_id(request)
+    orderitem = order.objects.filter(cart_id = cartid)
+    print("one")
+    if not orderitem:
+        print("two")
+        oi = order()
+        oi.uid = request.user.id
+        print(oi.uid)
+        oi.fname = fname
+        oi.lname = lname
+        oi.address = address
+        oi.landmark = landmark
+        oi.pincode = pincode
+        oi.phoneno = phone
+        oi.cart_id = cartid
+        oi.save()
+
+        del request.session[CART_ID_SESSION_KEY]
+    return HttpResponse('ok')
+
+
+def getitems(request):
+    postdata = request.POST.copy()
+    id = postdata.get('id','')
+    citems = CartItem.objects.filter(cart_id = id)
+    return HttpResponse(citems)

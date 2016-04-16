@@ -21,5 +21,4 @@ from django.contrib.auth.forms import UserCreationForm
 urlpatterns = [
     url(r'^fish/', include('fish_market.urls', namespace="fish_market")),
     url(r'^admin/', admin.site.urls),
-    
 ]

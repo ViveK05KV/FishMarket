@@ -115,3 +115,43 @@
 .fish_link{
   color: #ffffff;
 }
+
+
+
+
+/*___________________________________________________________*/
+
+#checkout{
+  margin-top: 120px;
+  margin-left: 550px;
+  margin-right: 150px;
+  height: 100%;
+  margin-bottom: 150px;
+}
+#shopping{
+  margin-left: 65px;
+}
+
+
+/*___________________________________________________________*/
+
+#thisone{
+  margin-top: 120px;
+  margin-left: 150px;
+  margin-right: 150px;
+  height: 100%;
+  margin-bottom: 150px;
+}
+
+
+
+/*___________________________________________________________*/
+
+#error{
+
+  margin-top: 200px;
+  margin-left: 150px;
+  margin-right: 150px;
+  height: 100%;
+  margin-bottom: 150px;
+}

@@ -14,7 +14,7 @@
     <div class="ui inverted segment" id="menu">
       <div class="ui inverted secondary  menu">
         <a class="item" style="font-size:20px;margin-left:50px;" href="index.html">Logo</a>
-        <a class="item" style="margin-right:40px;margin-left:70px;" href="index.html">
+        <a class="item" style="margin-right:40px;margin-left:70px;" href="/fish/home">
           <i class="big home icon"></i>
           Home
         </a>
@@ -40,14 +40,14 @@
               <i class="search link icon"></i>
             </div>
           </div>
-          <button class="ui inverted button">
+          <a class="ui inverted button" href="/fish/one/showcart/">
             <i class="Add to cart icon"></i>
-            Cart
-          </button>
+            Cart(<script>document.write(localStorage.getItem("count"));</script>)
+          </a>
           {% if user.is_authenticated %}
-              <p>Welcome, {{ user.username }}  <a class="ui item" href="/fish/logout/">Logout</a></p>
+            <p>Welcome, {{ user.username }}  <a class="ui item" href="/fish/logout/">Logout</a></p>
           {% else %}
-              <p>Welcome, Guest <a class="ui item" href="/fish/login">Login</a></p>
+            <p>Welcome, Guest <a class="ui item" href="/fish/login">Login</a></p>
           {% endif %}
         </div>
       </div>
@@ -72,7 +72,7 @@
               </p>
             </div>
           </div>
-          <a class="header">{{ fish.fishname}}/Rs{{fish.currentrate}}</a>
+          <a class="ui black label">{{ fish.fishname}}/Rs{{fish.currentrate}}</a>
         </div>
         {% endfor %}
       </div>
@@ -93,7 +93,7 @@
               </p>
             </div>
           </div>
-          <a class="header">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
+          <a  class="ui black label">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
         </div>
         {% endfor %}
       </div>
@@ -114,7 +114,7 @@
               </p>
             </div>
           </div>
-          <a class="header">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
+          <a  class="ui black label">{{ fish.fishname }}/Rs{{fish.currentrate}}</a>
         </div>
         {% endfor %}
       </div>
