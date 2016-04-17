@@ -18,10 +18,18 @@
                'id':  z // from form
                },
           success: function(data) {
+            somedata = JSON.parse(data)
+
               console.log("Here");
               //console.log(data[0].id);
               //var obj = JSON.parse(data);
-              console.log(data[1].cart_id);
+              console.log(somedata)
+
+              console.log(somedata.pk);
+
+                            console.log(somedata[0].pk);
+
+                                          console.log(somedata['pk']);
                 //data[0].ft
                   //alert(i);
 

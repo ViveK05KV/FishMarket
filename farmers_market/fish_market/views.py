@@ -105,9 +105,9 @@ def getitems(request):
     idd = postdata.get('id','')
     print("________________________________")
     print(idd)
-    citems = CartItem.objects.filter(cart_id = '2(%u7OWGjKxbsbhVP)Q!zJG()Fyl1Xzu%Y3%99^vK)Gjm5oMFU')
+    citems = CartItem.objects.filter(cart_id = 'B@sXT*qSs9acVg&UwQfpLfBRip$%fQkAk41vaB%IH#^NHnUsdK')
     for i in citems:
-        print(i.id)
+        print(i)
     arr = []
     for data in citems:
         arr.append({
@@ -121,9 +121,9 @@ def getitems(request):
     #data = serializers.serialize('json', arr)
     #data = serializers.serialize('json', [citems,])
     #return JsonResponse(arr, safe=True)
-    #data = serializers.serialize("json", citems)
+    data = serializers.serialize("json", citems)
     #return HttpResponse(data, mimetype='application/json')
     #return HttpResponse(data, content_type='application/json')
     #return HttpResponse(json.dumps(arr), content_type="application/json")
     #return HttpResponse(citems)
-    return HttpResponse(json.dumps(citems), mimetype='application/json')
+    return HttpResponse(json.dumps(data))
