@@ -19,10 +19,13 @@
                },
           success: function(data) {
               console.log("Here");
-              var JsonObject= JSON.parse(data);
-              for (var i=0 ; i<JsonObject.length ; i++){
-                console.log(i);
-              }
+              //console.log(data[0].id);
+              //var obj = JSON.parse(data);
+              console.log(data[1].cart_id);
+                //data[0].ft
+                  //alert(i);
+
+            //  console.log({{data.id}});
               console.log("Here");
             } //end function
         } // end ajax

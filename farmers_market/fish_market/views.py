@@ -108,20 +108,22 @@ def getitems(request):
     citems = CartItem.objects.filter(cart_id = '2(%u7OWGjKxbsbhVP)Q!zJG()Fyl1Xzu%Y3%99^vK)Gjm5oMFU')
     for i in citems:
         print(i.id)
-    #arr = []
-    #for data in citems:
-    #    arr.append({
-    #        'cart_id': data.cart_id,
-    #        'date_added': data.date_added,
-    #        'quantity': data.quantity,
-    #        'product': data.product,
-    #        'ft': data.ft,
-    #    })
-    #print("Ok")
+    arr = []
+    for data in citems:
+        arr.append({
+            'cart_id': data.cart_id,
+            'date_added': data.date_added,
+            'quantity': data.quantity,
+            'product': data.product,
+            'ft': data.ft,
+        },)
+    print("Ok")
     #data = serializers.serialize('json', arr)
     #data = serializers.serialize('json', [citems,])
-    #return JsonResponse({'data':data}, safe=True)
-    #data = serializers.serialize("json", arr)
+    #return JsonResponse(arr, safe=True)
+    #data = serializers.serialize("json", citems)
     #return HttpResponse(data, mimetype='application/json')
-    #return HttpResponse(arr, content_type='application/json')
-    return HttpResponse(citems)
+    #return HttpResponse(data, content_type='application/json')
+    #return HttpResponse(json.dumps(arr), content_type="application/json")
+    #return HttpResponse(citems)
+    return HttpResponse(json.dumps(citems), mimetype='application/json')
